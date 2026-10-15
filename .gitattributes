@@ -4,5 +4,8 @@ public/*.html linguist-detectable=false
 public/*.css linguist-detectable=false
 public/*.js linguist-detectable=false
 
-# Jadikan Nim sebagai satu-satunya bahasa utama repository
+# Bahasa Pemrograman Utama (Polyglot Stack)
 src/*.nim linguist-detectable=true
+elixir_core/**/*.ex linguist-detectable=true
+elixir_core/mix.exs linguist-detectable=true
+cli_tool/*.v linguist-detectable=true
