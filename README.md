@@ -1,7 +1,7 @@
-# GitBadge Hub ⚡
-
 > **Platform Speedrun & Panduan Lengkap Medali GitHub (GitHub Achievements)**  
-> Ditenagai oleh **Nim Systems Programming Language** dan siap dideploy langsung ke **Vercel**.
+> Ditenagai oleh **Nim Systems Programming Language** dan dideploy di **Vercel**.
+> 
+> 🔗 **Live Demo:** [https://code-lab-five-cyan.vercel.app/](https://code-lab-five-cyan.vercel.app/)
 
 ---
 
