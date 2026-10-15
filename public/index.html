@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitBadge Hub ⚡ - Panduan Cepat & Generator Medali GitHub</title>
+  <meta name="description" content="Platform panduan interaktif, generator commit co-author, dan speedrun toolkit untuk membuka seluruh medali dan achievements di profil GitHub.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Glow Effect -->
+  <div class="bg-glow-container">
+    <div class="glow-orb glow-1"></div>
+    <div class="glow-orb glow-2"></div>
+    <div class="glow-orb glow-3"></div>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="nim-powered-tag">
+        <span>👑</span> Core Logic Powered by Nim Systems Language
+      </div>
+      <h1>
+        Koleksi Medali GitHub <br>
+        <span class="text-gradient">Lebih Cepat, Terarah & Elegan</span>
+      </h1>
+      <p>
+        Panduan speedrun interaktif dan generator commit resmi untuk membuka seluruh GitHub Achievements di profilmu.
+      </p>
+    </header>
+
+    <!-- Interactive Simulator & Generator Grid -->
+    <div class="dashboard-grid">
+      <!-- Tool 1: Co-Author Commit Generator (Pair Extraordinaire) -->
+      <section class="glass-panel">
+        <h2 class="tool-title">🤝 Co-Author Commit Generator</h2>
+        <p class="tool-desc">
+          Generate format trailer <code>Co-authored-by:</code> yang 100% valid dan sah diverifikasi oleh sistem antrian GitHub.
+        </p>
+
+        <div class="form-group">
+          <label for="coauthor-name">Username / Nama Kolaborator</label>
+          <input type="text" id="coauthor-name" class="form-input" placeholder="Misal: Aytsrp" value="Aytsrp">
+        </div>
+
+        <div class="form-group">
+          <label for="coauthor-email">Email Terdaftar / No-Reply Kolaborator</label>
+          <input type="email" id="coauthor-email" class="form-input" placeholder="Misal: Aytsrp@users.noreply.github.com" value="Aytsrp@users.noreply.github.com">
+        </div>
+
+        <button id="btn-generate-coauthor" class="btn-primary">
+          <span>⚡</span> Generate Kode Commit Nim
+        </button>
+
+        <div class="output-box">
+          <button id="btn-copy-coauthor" class="btn-copy">Salin Kode</button>
+          <pre id="coauthor-output" class="output-code">git commit -m "feat: implement pair collaboration" -m "Co-authored-by: Aytsrp &lt;Aytsrp@users.noreply.github.com&gt;"
+git push origin feature-branch</pre>
+        </div>
+      </section>
+
+      <!-- Tool 2: Tier Simulator (Pull Shark & Galaxy Brain) -->
+      <section class="glass-panel">
+        <h2 class="tool-title">🎚️ Achievement Tier Simulator</h2>
+        <p class="tool-desc">
+          Hitung progres tier medali kamu (Bronze, Silver x2, hingga Gold x3).
+        </p>
+
+        <div class="form-group">
+          <label for="input-pr-count">🦈 Jumlah Pull Request yang Sudah Di-Merge</label>
+          <input type="number" id="input-pr-count" class="form-input" value="16" min="0">
+          <div style="margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600;">
+            Status: <span id="pr-tier-badge" style="color: #93c5fd;">Silver Tier (x2) - Hunter Shark 🦈</span>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 1.5rem;">
+          <label for="input-qa-count">🧠 Jumlah Jawaban Q&A Discussions Terjawab</label>
+          <input type="number" id="input-qa-count" class="form-input" value="2" min="0">
+          <div style="margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600;">
+            Status: <span id="qa-tier-badge" style="color: #34d399;">Bronze Tier (x1) - Galaxy Novice 💡</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Badges Catalog & Guides -->
+    <section class="badges-section">
+      <h2 class="section-title">
+        <span>🏆</span> Direktori Speedrun Medali GitHub
+      </h2>
+
+      <div class="badge-grid">
+        <!-- Quickdraw -->
+        <article class="badge-card">
+          <div class="badge-header">
+            <div class="badge-icon-box">🤠</div>
+            <div class="badge-info">
+              <h3>Quickdraw</h3>
+              <span class="badge-pill pill-fast">30 Detik • 100% Solo</span>
+            </div>
+          </div>
+          <div class="badge-body">
+            <p>Menutup issue atau pull request dalam waktu kurang dari 5 menit setelah dibuat.</p>
+            <ul class="steps-list">
+              <li>Buat issue baru di repo publik apa saja.</li>
+              <li>Beri judul bebas (contoh: <code>test quickdraw</code>).</li>
+              <li>Segera klik tombol <strong>"Close issue"</strong> dalam hitungan detik.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Pull Shark -->
+        <article class="badge-card">
+          <div class="badge-header">
+            <div class="badge-icon-box">🦈</div>
+            <div class="badge-info">
+              <h3>Pull Shark</h3>
+              <span class="badge-pill pill-fast">2 Menit • 100% Solo</span>
+            </div>
+          </div>
+          <div class="badge-body">
+            <p>Membuka dan menggabungkan (merge) Pull Request ke branch utama.</p>
+            <ul class="steps-list">
+              <li>Bronze: Cukup merge 2 Pull Request.</li>
+              <li>Silver (x2): Capai 16 Pull Request merged.</li>
+              <li>Gold (x3): Capai 128 Pull Request merged.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Galaxy Brain -->
+        <article class="badge-card">
+          <div class="badge-header">
+            <div class="badge-icon-box">🧠</div>
+            <div class="badge-info">
+              <h3>Galaxy Brain</h3>
+              <span class="badge-pill pill-community">5 Menit • Kolaborasi</span>
+            </div>
+          </div>
+          <div class="badge-body">
+            <p>Mendapatkan jawaban yang diterima (marked as answer) di GitHub Discussions.</p>
+            <ul class="steps-list">
+              <li>Aktifkan fitur Discussions di Settings repositori.</li>
+              <li>Minta akun kawan membuat diskusi kategori <strong>Q&A</strong>.</li>
+              <li>Jawab diskusi tersebut, lalu tandai sebagai <strong>"Mark as answer"</strong> (butuh 2x untuk Bronze).</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Pair Extraordinaire -->
+        <article class="badge-card">
+          <div class="badge-header">
+            <div class="badge-icon-box">🤝</div>
+            <div class="badge-info">
+              <h3>Pair Extraordinaire</h3>
+              <span class="badge-pill pill-community">3 Menit • Co-Author</span>
+            </div>
+          </div>
+          <div class="badge-body">
+            <p>Melakukan merge pull request yang memiliki trailer <code>Co-authored-by:</code>.</p>
+            <ul class="steps-list">
+              <li>Gunakan generator commit di bagian atas halaman ini.</li>
+              <li>Pastikan format email co-author sesuai akun GitHub aktif.</li>
+              <li>Merge branch tersebut ke default branch (<code>main</code>).</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- YOLO -->
+        <article class="badge-card">
+          <div class="badge-header">
+            <div class="badge-icon-box">🚀</div>
+            <div class="badge-info">
+              <h3>YOLO</h3>
+              <span class="badge-pill pill-elite">1 Menit • Tanpa Review</span>
+            </div>
+          </div>
+          <div class="badge-body">
+            <p>Melakukan merge pull request tanpa menunggu review atau persetujuan reviewer.</p>
+            <ul class="steps-list">
+              <li>Saat membuat PR, request review ke rekan kolaborator.</li>
+              <li>Tanpa menunggu teman melakukan approval, langsung klik <strong>Merge pull request</strong>.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Public Sponsor -->
+        <article class="badge-card">
+          <div class="badge-header">
+            <div class="badge-icon-box">💖</div>
+            <div class="badge-info">
+              <h3>Public Sponsor</h3>
+              <span class="badge-pill pill-elite">Resmi • $1 Donasi</span>
+            </div>
+          </div>
+          <div class="badge-body">
+            <p>Mendukung pengembang open-source melalui platform resmi GitHub Sponsors.</p>
+            <ul class="steps-list">
+              <li>Pilih developer open-source dengan tier $1 (misal: pengembang library Flutter/tema).</li>
+              <li>Pilih opsi visibilitas <strong>Public Sponsor</strong> (jangan anonymous).</li>
+              <li>Lencana hati pink akan menempel permanen di profil.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        Inisiatif eksperimental oleh <a href="https://github.com/Yogiexc" target="_blank">Bryan Yogie (@Yogiexc)</a> 
+        • Ditenagai oleh <strong>Nim Language</strong> & Siap Tayang di <strong>Vercel</strong>.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Nim Compiled JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
