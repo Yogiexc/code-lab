@@ -686,6 +686,120 @@ body {
   overflow-x: auto;
 }
 
+/* UNIX Terminal Console Overlay */
+#unix-terminal-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5vh;
+  transition: opacity 0.15s ease;
+}
+
+#unix-terminal-modal.unix-terminal-hidden {
+  display: none !important;
+}
+
+.term-window {
+  width: 90%;
+  max-width: 680px;
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+
+.term-header {
+  background: #0d0d0d;
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.term-title {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.term-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.term-close-btn:hover {
+  color: #fff;
+}
+
+.term-body {
+  padding: 1rem;
+  height: 280px;
+  overflow-y: auto;
+  font-size: 0.8rem;
+  color: #a3a3a3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.term-line {
+  line-height: 1.4;
+}
+
+.term-hl {
+  color: #fff;
+  font-weight: 600;
+}
+
+.term-response {
+  color: #ededed;
+  white-space: pre-wrap;
+}
+
+.term-error {
+  color: #ef4444;
+}
+
+.term-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: #050505;
+  border-top: 1px solid var(--border);
+}
+
+.term-prompt {
+  color: #10b981;
+  font-size: 0.8rem;
+  font-weight: 600;
+  user-select: none;
+}
+
+.term-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
 /* Footer */
 footer {
   border-top: 1px solid var(--border);
