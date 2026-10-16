@@ -118,6 +118,10 @@ git push origin feature-branch</pre>
           </div>
           <div class="game-stats-box">
             <div>Score: <span id="nokia-score" class="stat-num">0</span></div>
+            <div class="nokia-action-bar">
+              <button id="btn-toggle-lcd" class="btn-nokia-tool">LCD: Mono</button>
+              <button id="btn-play-tune" class="btn-nokia-tool">♪ Tone</button>
+            </div>
           </div>
         </div>
 
@@ -154,6 +158,22 @@ git push origin feature-branch</pre>
       </div>
     </section>
 
+    <!-- Live Profile Inspector Section -->
+    <section class="inspector-section">
+      <div class="workbench-card">
+        <h2 class="card-title">Live GitHub Profile Inspector & Audit</h2>
+        <p class="card-desc">Verify public achievement eligibility, repositories, and stars directly against the GitHub REST API.</p>
+
+        <div style="display: flex; gap: 0.5rem; max-width: 450px;">
+          <input type="text" id="gh-username-input" class="form-control" placeholder="GitHub username (e.g. Yogiexc)" value="Yogiexc" spellcheck="false">
+          <button id="btn-inspect-profile" class="btn-terminal" style="width: auto; white-space: nowrap; padding: 0.6rem 1.25rem;">Inspect Profile</button>
+        </div>
+
+        <div id="inspector-results"></div>
+        <pre id="ascii-receipt-box"></pre>
+      </div>
+    </section>
+
     <!-- Catalog Section -->
     <section class="catalog-section">
       <div class="catalog-header">
@@ -173,6 +193,30 @@ git push origin feature-branch</pre>
   </div>
 
   <script src="app.js"></script>
+  <script src="nokia_audio.js"></script>
   <script src="nokia_suite.js"></script>
+  <script src="profile_inspector.js"></script>
+  <script>
+    // LCD filter toggle & audio tune hook
+    document.addEventListener('DOMContentLoaded', () => {
+      const lcdBtn = document.getElementById('btn-toggle-lcd');
+      const tuneBtn = document.getElementById('btn-play-tune');
+      const bezel = document.querySelector('.nokia-display-wrapper');
+
+      if (lcdBtn && bezel) {
+        lcdBtn.addEventListener('click', () => {
+          bezel.classList.toggle('lcd-green-mode');
+          const isGreen = bezel.classList.contains('lcd-green-mode');
+          lcdBtn.innerText = isGreen ? 'LCD: Green 3310' : 'LCD: Mono';
+        });
+      }
+
+      if (tuneBtn && window.nokiaAudio) {
+        tuneBtn.addEventListener('click', () => {
+          window.nokiaAudio.playNokiaTune();
+        });
+      }
+    });
+  </script>
 </body>
 </html>

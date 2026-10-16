@@ -212,17 +212,22 @@ class NokiaGameSuite {
       if (action === 'down' && d.y === 0) this.snake.nextDir = { x: 0, y: 1 };
       if (action === 'left' && d.x === 0) this.snake.nextDir = { x: -1, y: 0 };
       if (action === 'right' && d.x === 0) this.snake.nextDir = { x: 1, y: 0 };
+      if (window.nokiaAudio) window.nokiaAudio.beep();
     } else if (this.activeGame === 'space') {
       if (action === 'up') this.space.playerY = Math.max(20, this.space.playerY - 22);
       if (action === 'down') this.space.playerY = Math.min(260, this.space.playerY + 22);
       if (action === 'action') {
         this.space.lasers.push({ x: 70, y: this.space.playerY + 6 });
+        if (window.nokiaAudio) window.nokiaAudio.laser();
       }
     } else if (this.activeGame === 'bounce') {
       if (action === 'left') this.bounce.vx = -4.0;
       if (action === 'right') this.bounce.vx = 4.0;
       if (action === 'up' || action === 'action') {
-        if (this.bounce.ballY >= 238) this.bounce.vy = -9.0;
+        if (this.bounce.ballY >= 238) {
+          this.bounce.vy = -9.0;
+          if (window.nokiaAudio) window.nokiaAudio.bounce();
+        }
       }
     } else if (this.activeGame === 'carrom') {
       if (action === 'left') this.carrom.aimAngle -= 0.15;
@@ -283,6 +288,7 @@ class NokiaGameSuite {
           this.score += 10;
           this.spawnSnakeFood();
           this.updateHUD();
+          if (window.nokiaAudio) window.nokiaAudio.eatFood();
         } else {
           this.snake.body.pop();
         }
