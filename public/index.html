@@ -19,8 +19,11 @@
   <div class="container">
     <!-- Header -->
     <header class="header">
-      <div class="nim-powered-tag">
-        <span>👑</span> Core Logic Powered by Nim Systems Language
+      <div class="tech-badges-row">
+        <span class="tech-tag tag-asm">⚙️ Assembly x86-64</span>
+        <span class="tech-tag tag-nim">🟡 Nim Systems</span>
+        <span class="tech-tag tag-elixir">🟣 Elixir BEAM</span>
+        <span class="tech-tag tag-v">⚡ V (Vlang)</span>
       </div>
       <h1>
         Koleksi Medali GitHub <br>
@@ -30,6 +33,21 @@
         Panduan speedrun interaktif dan generator commit resmi untuk membuka seluruh GitHub Achievements di profilmu.
       </p>
     </header>
+
+    <!-- Progress Tracker -->
+    <div class="glass-panel progress-card">
+      <div class="progress-header">
+        <div class="progress-title">
+          <span>🎯</span> Status Koleksi Medali GitHub Kamu
+        </div>
+        <div class="progress-stats">
+          <span id="unlocked-count">4 / 7 Unlocked</span> • <span id="unlocked-percent">57%</span>
+        </div>
+      </div>
+      <div class="progress-bar-track">
+        <div id="progress-fill" class="progress-bar-fill"></div>
+      </div>
+    </div>
 
     <!-- Interactive Simulator & Generator Grid -->
     <div class="dashboard-grid">
@@ -51,7 +69,7 @@
         </div>
 
         <button id="btn-generate-coauthor" class="btn-primary">
-          <span>⚡</span> Generate Kode Commit Nim
+          <span>⚡</span> Generate Kode Commit
         </button>
 
         <div class="output-box">
@@ -92,119 +110,9 @@ git push origin feature-branch</pre>
         <span>🏆</span> Direktori Speedrun Medali GitHub
       </h2>
 
-      <div class="badge-grid">
-        <!-- Quickdraw -->
-        <article class="badge-card">
-          <div class="badge-header">
-            <div class="badge-icon-box">🤠</div>
-            <div class="badge-info">
-              <h3>Quickdraw</h3>
-              <span class="badge-pill pill-fast">30 Detik • 100% Solo</span>
-            </div>
-          </div>
-          <div class="badge-body">
-            <p>Menutup issue atau pull request dalam waktu kurang dari 5 menit setelah dibuat.</p>
-            <ul class="steps-list">
-              <li>Buat issue baru di repo publik apa saja.</li>
-              <li>Beri judul bebas (contoh: <code>test quickdraw</code>).</li>
-              <li>Segera klik tombol <strong>"Close issue"</strong> dalam hitungan detik.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- Pull Shark -->
-        <article class="badge-card">
-          <div class="badge-header">
-            <div class="badge-icon-box">🦈</div>
-            <div class="badge-info">
-              <h3>Pull Shark</h3>
-              <span class="badge-pill pill-fast">2 Menit • 100% Solo</span>
-            </div>
-          </div>
-          <div class="badge-body">
-            <p>Membuka dan menggabungkan (merge) Pull Request ke branch utama.</p>
-            <ul class="steps-list">
-              <li>Bronze: Cukup merge 2 Pull Request.</li>
-              <li>Silver (x2): Capai 16 Pull Request merged.</li>
-              <li>Gold (x3): Capai 128 Pull Request merged.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- Galaxy Brain -->
-        <article class="badge-card">
-          <div class="badge-header">
-            <div class="badge-icon-box">🧠</div>
-            <div class="badge-info">
-              <h3>Galaxy Brain</h3>
-              <span class="badge-pill pill-community">5 Menit • Kolaborasi</span>
-            </div>
-          </div>
-          <div class="badge-body">
-            <p>Mendapatkan jawaban yang diterima (marked as answer) di GitHub Discussions.</p>
-            <ul class="steps-list">
-              <li>Aktifkan fitur Discussions di Settings repositori.</li>
-              <li>Minta akun kawan membuat diskusi kategori <strong>Q&A</strong>.</li>
-              <li>Jawab diskusi tersebut, lalu tandai sebagai <strong>"Mark as answer"</strong> (butuh 2x untuk Bronze).</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- Pair Extraordinaire -->
-        <article class="badge-card">
-          <div class="badge-header">
-            <div class="badge-icon-box">🤝</div>
-            <div class="badge-info">
-              <h3>Pair Extraordinaire</h3>
-              <span class="badge-pill pill-community">3 Menit • Co-Author</span>
-            </div>
-          </div>
-          <div class="badge-body">
-            <p>Melakukan merge pull request yang memiliki trailer <code>Co-authored-by:</code>.</p>
-            <ul class="steps-list">
-              <li>Gunakan generator commit di bagian atas halaman ini.</li>
-              <li>Pastikan format email co-author sesuai akun GitHub aktif.</li>
-              <li>Merge branch tersebut ke default branch (<code>main</code>).</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- YOLO -->
-        <article class="badge-card">
-          <div class="badge-header">
-            <div class="badge-icon-box">🚀</div>
-            <div class="badge-info">
-              <h3>YOLO</h3>
-              <span class="badge-pill pill-elite">1 Menit • Tanpa Review</span>
-            </div>
-          </div>
-          <div class="badge-body">
-            <p>Melakukan merge pull request tanpa menunggu review atau persetujuan reviewer.</p>
-            <ul class="steps-list">
-              <li>Saat membuat PR, request review ke rekan kolaborator.</li>
-              <li>Tanpa menunggu teman melakukan approval, langsung klik <strong>Merge pull request</strong>.</li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- Public Sponsor -->
-        <article class="badge-card">
-          <div class="badge-header">
-            <div class="badge-icon-box">💖</div>
-            <div class="badge-info">
-              <h3>Public Sponsor</h3>
-              <span class="badge-pill pill-elite">Resmi • $1 Donasi</span>
-            </div>
-          </div>
-          <div class="badge-body">
-            <p>Mendukung pengembang open-source melalui platform resmi GitHub Sponsors.</p>
-            <ul class="steps-list">
-              <li>Pilih developer open-source dengan tier $1 (misal: pengembang library Flutter/tema).</li>
-              <li>Pilih opsi visibilitas <strong>Public Sponsor</strong> (jangan anonymous).</li>
-              <li>Lencana hati pink akan menempel permanen di profil.</li>
-            </ul>
-          </div>
-        </article>
+      <!-- Dynamic Badges Grid -->
+      <div class="badge-grid" id="badge-grid-container">
+        <!-- Rendered dynamically by app.js with local storage checklist -->
       </div>
     </section>
 
@@ -212,12 +120,11 @@ git push origin feature-branch</pre>
     <footer>
       <p>
         Inisiatif eksperimental oleh <a href="https://github.com/Yogiexc" target="_blank">Bryan Yogie (@Yogiexc)</a> 
-        • Ditenagai oleh <strong>Nim Language</strong> & Siap Tayang di <strong>Vercel</strong>.
+        • Ditenagai oleh <strong>Assembly x86-64, Nim, Elixir, & Vlang</strong> • Live di <strong>Vercel</strong>.
       </p>
     </footer>
   </div>
 
-  <!-- Nim Compiled JavaScript -->
   <script src="app.js"></script>
 </body>
 </html>

@@ -4,7 +4,8 @@ public/*.html linguist-detectable=false
 public/*.css linguist-detectable=false
 public/*.js linguist-detectable=false
 
-# Bahasa Pemrograman Utama (Polyglot Stack)
+# Polyglot Multi-Language Stack
+asm_core/*.asm linguist-detectable=true
 src/*.nim linguist-detectable=true
 elixir_core/**/*.ex linguist-detectable=true
 elixir_core/mix.exs linguist-detectable=true
