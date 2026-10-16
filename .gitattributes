@@ -4,8 +4,11 @@ public/*.html linguist-detectable=false
 public/*.css linguist-detectable=false
 public/*.js linguist-detectable=false
 
-# Polyglot Multi-Language Stack
+# Bahasa Tingkat Rendah (Low-Level Systems & Machine Code)
 asm_core/*.asm linguist-detectable=true
+zig_engine/*.zig linguist-detectable=true
+
+# Bahasa Tingkat Tinggi (Modern Systems & High-Level Architecture)
 src/*.nim linguist-detectable=true
 elixir_core/**/*.ex linguist-detectable=true
 elixir_core/mix.exs linguist-detectable=true
