@@ -105,69 +105,53 @@ git push origin feature-branch</pre>
       </section>
     </div>
 
-    <!-- Machine Engine Interactive Lab: Flappy ASM Game -->
-    <section class="game-section">
-      <div class="game-card">
-        <div class="game-meta">
+    <!-- Nokia Retro Monochrome Gaming Suite (8-in-1) -->
+    <section class="nokia-suite-section">
+      <div class="nokia-suite-card">
+        <div class="nokia-suite-header">
           <div>
-            <span class="game-tag">asm_core / flappy_core.asm</span>
-            <h2 class="card-title" style="margin-top: 0.4rem;">Machine Physics Engine — Flappy Drone</h2>
+            <span class="game-tag">asm_core / nokia_games_core.asm</span>
+            <h2 class="card-title" id="active-game-title" style="margin-top: 0.4rem;">Snake II (Snake Xenzia)</h2>
             <p class="card-desc" style="margin-bottom: 0;">
-              Real-time gravity accumulation and AABB hardware collision routine executing at 60 FPS.
+              Simulasi mesin display monokrom Nokia 3310 murni hitam-putih dengan ALU register x86-64.
             </p>
           </div>
           <div class="game-stats-box">
-            <div>Score: <span id="flappy-score" class="stat-num">0</span></div>
-            <div>Best: <span id="flappy-hiscore" class="stat-num">0</span></div>
+            <div>Score: <span id="nokia-score" class="stat-num">0</span></div>
           </div>
         </div>
 
-        <div class="canvas-container">
-          <canvas id="flappy-canvas" width="480" height="320"></canvas>
+        <!-- 8-in-1 Game Selector Tabs -->
+        <div class="nokia-tab-selector">
+          <button class="nokia-tab is-selected" data-game="snake">Snake II</button>
+          <button class="nokia-tab" data-game="space">Space Impact</button>
+          <button class="nokia-tab" data-game="bounce">Bounce Classic</button>
+          <button class="nokia-tab" data-game="diamond">Diamond Rush</button>
+          <button class="nokia-tab" data-game="bantumi">Bantumi</button>
+          <button class="nokia-tab" data-game="tetris">Tetris</button>
+          <button class="nokia-tab" data-game="carrom">Pocket Carrom</button>
+          <button class="nokia-tab" data-game="cricket">Cricket</button>
         </div>
-        <div class="game-hint">
-          <span>Controls: [Space] or Click / Tap to Flap</span>
-          <span>Target Architecture: x86-64 NASM & WAT</span>
-        </div>
-      </div>
 
-      <!-- Metal Slug Machine Action Arena -->
-      <div class="game-card" style="margin-top: 1.5rem;">
-        <div class="game-meta">
-          <div>
-            <span class="game-tag">asm_core / metal_slug_core.asm</span>
-            <h2 class="card-title" style="margin-top: 0.4rem;">Machine Combat Arena — Metal Slug</h2>
-            <p class="card-desc" style="margin-bottom: 0;">
-              High-velocity ballistic raycasting, sprite state recoil, and AABB multi-entity damage calculation.
-            </p>
+        <!-- Nokia Monochrome Screen -->
+        <div class="nokia-display-wrapper">
+          <div class="nokia-screen-bezel">
+            <canvas id="nokia-canvas" width="480" height="300"></canvas>
           </div>
-          <div class="game-stats-box">
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>HP</span>
-              <div class="ms-hp-track">
-                <div id="ms-hp-fill" class="ms-hp-bar"></div>
-              </div>
-            </div>
-            <div>Score: <span id="ms-score-val" class="stat-num">0</span></div>
+
+          <!-- Physical Nokia Keypad Controls -->
+          <div class="nokia-gamepad">
+            <button id="n-btn-up" class="n-btn">▲ [W]</button>
+            <button id="n-btn-down" class="n-btn">▼ [S]</button>
+            <button id="n-btn-left" class="n-btn">◀ [A]</button>
+            <button id="n-btn-right" class="n-btn">▶ [D]</button>
+            <button id="n-btn-action" class="n-btn" style="background: #222; border-color: #444;">SELECT [SPACE]</button>
           </div>
         </div>
 
-        <div class="canvas-container">
-          <canvas id="metalslug-canvas" width="600" height="280"></canvas>
-        </div>
-
-        <div class="ms-controls-bar">
-          <div class="game-hint">
-            <span>Desktop: [A/D] Move · [W/Space] Jump · [J/Z/F] Machine Gun</span>
-            <span>Reload/Respawn: [R]</span>
-          </div>
-          <!-- Mobile / Virtual Gamepad -->
-          <div class="ms-virtual-pad">
-            <button id="ms-btn-left" class="v-btn">◀</button>
-            <button id="ms-btn-right" class="v-btn">▶</button>
-            <button id="ms-btn-jump" class="v-btn v-btn-action">JUMP</button>
-            <button id="ms-btn-fire" class="v-btn v-btn-fire">FIRE</button>
-          </div>
+        <div class="nokia-footer-meta">
+          <span>Controls: Arrow Keys / WASD · Space / Enter to Action</span>
+          <span>Display Profile: Pure Monochrome 1-bit Pixel Matrix</span>
         </div>
       </div>
     </section>
@@ -191,7 +175,6 @@ git push origin feature-branch</pre>
   </div>
 
   <script src="app.js"></script>
-  <script src="flappy_game.js"></script>
-  <script src="metalslug_game.js"></script>
+  <script src="nokia_suite.js"></script>
 </body>
 </html>

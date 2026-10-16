@@ -1,11 +1,11 @@
 # GitBadge Hub
 
-> **Polyglot Systems Architecture & GitHub Achievement Reference Platform**  
+> **Polyglot Systems Architecture & Nokia Retro Monochrome Gaming Suite**  
 > A full-spectrum computational lab integrating hardware machine instructions (x86-64 Assembly), manual memory control (Zig), native systems compilation (Nim, V), and distributed concurrency (Elixir).
 
 ---
 
-[Live Deployment (Vercel)](https://code-lab-five-cyan.vercel.app/) • [Source Code (GitHub)](https://github.com/Yogiexc/code-lab)
+[Live Platform (Vercel)](https://code-lab-five-cyan.vercel.app/) • [Source Code (GitHub)](https://github.com/Yogiexc/code-lab)
 
 ---
 
@@ -15,7 +15,7 @@ The project structure organizes responsibilities by abstraction layer, allocatin
 
 | Layer | Language / Toolchain | Module Path | Responsibility |
 | :--- | :--- | :--- | :--- |
-| **Hardware / Machine** | x86-64 Assembly (NASM) | `asm_core/badge_verifier.asm` | Direct CPU register operations, fast SHA-1 parsing, hardware POPCNT instructions |
+| **Hardware / Machine** | x86-64 Assembly (NASM) | `asm_core/nokia_games_core.asm` | Low-level ALU bitwise state machines for 8 retro Nokia games & commit verification |
 | **Manual Systems** | Zig (0.13+) | `zig_engine/badge_memory_engine.zig` | Manual memory allocation, zero-overhead buffers, signature verification |
 | **Native Fast CLI** | V (Vlang) | `cli_tool/main.v` | High-speed standalone terminal utility for querying badge criteria |
 | **Transpiled Systems** | Nim (2.0+) | `src/app.nim`, `src/badge_engine.nim` | Core mathematical evaluation logic transpiled directly to web JavaScript |
@@ -23,7 +23,22 @@ The project structure organizes responsibilities by abstraction layer, allocatin
 
 ---
 
-## Core Capabilities
+## Nokia Retro 8-in-1 Monochrome Gaming Suite
+
+An interactive retro pixel machine embedded directly into the developer platform, strictly adhering to a 1-bit monochrome black & white LCD display profile:
+
+1. **Snake II (Snake Xenzia)** — Classic wall-wrapping snake logic with self-collision detection.
+2. **Space Impact** — Side-scrolling retro space shooter with laser beam raycasting against alien waves.
+3. **Bounce Classic** — Gravity-driven ball physics with restitution bounce mechanics and golden ring collection.
+4. **Diamond Rush** — Underground cave treasure-hunting with boulder physics.
+5. **Bantumi** — Digital adaptation of the traditional Mancala / Congklak pit-sowing game.
+6. **Tetris** — Matrix tetromino falling and line-clearing logic.
+7. **Pocket Carrom** — 2D board friction physics and pocket boundary collision.
+8. **Cricket** — Precision sweetspot bat-swing timing and boundary run scoring.
+
+---
+
+## Core Platform Capabilities
 
 1. **Co-Authored-By Signature Generator**  
    Produces strictly compliant Git commit trailer metadata according to GitHub contribution verification standards.
@@ -46,7 +61,9 @@ The project structure organizes responsibilities by abstraction layer, allocatin
 ```text
 code-lab/
 ├── asm_core/
-│   └── badge_verifier.asm            # Low-level assembly routines
+│   ├── nokia_games_core.asm          # Hardware Assembly logic for 8 Nokia titles
+│   ├── flappy_core.asm               # Fixed-point physics routines
+│   └── badge_verifier.asm            # Low-level commit verification routines
 ├── zig_engine/
 │   └── badge_memory_engine.zig       # Manual memory safety layer
 ├── cli_tool/
@@ -59,24 +76,10 @@ code-lab/
 │   └── badge_engine.nim              # Achievement rule definitions
 ├── public/
 │   ├── index.html                    # Interface layout
-│   ├── style.css                     # Design system and layout tokens
-│   └── app.js                        # Client execution bundle
+│   ├── style.css                     # Strict monochrome design system
+│   ├── app.js                        # Client execution bundle
+│   └── nokia_suite.js                # Nokia 8-in-1 retro monochrome runtime
 └── vercel.json                       # Static deployment configuration
-```
-
----
-
-## Local Development & Compilation
-
-### Web Application
-```bash
-# Serve public distribution folder locally
-npx serve public
-```
-
-### Compile Nim to Web Target
-```bash
-nim js -d:release -o:public/app.js src/app.nim
 ```
 
 ---
