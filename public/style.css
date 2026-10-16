@@ -331,6 +331,83 @@ body {
   border-color: var(--border-focus);
 }
 
+/* Game Section */
+.game-section {
+  margin-bottom: 3.5rem;
+}
+
+.game-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.game-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.game-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  background: #000;
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.game-stats-box {
+  display: flex;
+  gap: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: #000;
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.stat-num {
+  color: #fff;
+  font-weight: 600;
+}
+
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#flappy-canvas {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  aspect-ratio: 480 / 320;
+  display: block;
+  cursor: pointer;
+}
+
+.game-hint {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 0.75rem;
+}
+
 /* Catalog Table / Cards */
 .catalog-section {
   margin-bottom: 4rem;

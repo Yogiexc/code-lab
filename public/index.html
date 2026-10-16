@@ -105,6 +105,33 @@ git push origin feature-branch</pre>
       </section>
     </div>
 
+    <!-- Machine Engine Interactive Lab: Flappy ASM Game -->
+    <section class="game-section">
+      <div class="game-card">
+        <div class="game-meta">
+          <div>
+            <span class="game-tag">asm_core / flappy_core.asm</span>
+            <h2 class="card-title" style="margin-top: 0.4rem;">Machine Physics Engine — Flappy Drone</h2>
+            <p class="card-desc" style="margin-bottom: 0;">
+              Real-time gravity accumulation and AABB hardware collision routine executing at 60 FPS.
+            </p>
+          </div>
+          <div class="game-stats-box">
+            <div>Score: <span id="flappy-score" class="stat-num">0</span></div>
+            <div>Best: <span id="flappy-hiscore" class="stat-num">0</span></div>
+          </div>
+        </div>
+
+        <div class="canvas-container">
+          <canvas id="flappy-canvas" width="480" height="320"></canvas>
+        </div>
+        <div class="game-hint">
+          <span>Controls: [Space] or Click / Tap to Flap</span>
+          <span>Target Architecture: x86-64 NASM & WAT</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Catalog Section -->
     <section class="catalog-section">
       <div class="catalog-header">
@@ -124,5 +151,6 @@ git push origin feature-branch</pre>
   </div>
 
   <script src="app.js"></script>
+  <script src="flappy_game.js"></script>
 </body>
 </html>
