@@ -15,7 +15,7 @@ The project structure organizes responsibilities by abstraction layer, allocatin
 
 | Layer | Language / Toolchain | Module Path | Responsibility |
 | :--- | :--- | :--- | :--- |
-| **Hardware / Machine** | x86-64 Assembly (NASM) | `asm_core/nokia_games_core.asm` | Low-level ALU bitwise state machines for 8 retro Nokia games & commit verification |
+| **Hardware / Machine** | x86-64 Assembly (NASM) | `asm_core/nokia_games_core.asm` | Low-level ALU bitwise state machines for retro Nokia arcade games & commit verification |
 | **Manual Systems** | Zig (0.13+) | `zig_engine/badge_memory_engine.zig` | Manual memory allocation, zero-overhead buffers, signature verification |
 | **Native Fast CLI** | V (Vlang) | `cli_tool/main.v` | High-speed standalone terminal utility for querying badge criteria |
 | **Transpiled Systems** | Nim (2.0+) | `src/app.nim`, `src/badge_engine.nim` | Core mathematical evaluation logic transpiled directly to web JavaScript |
@@ -23,18 +23,16 @@ The project structure organizes responsibilities by abstraction layer, allocatin
 
 ---
 
-## Nokia Retro 8-in-1 Monochrome Gaming Suite
+## Nokia Retro 6-in-1 Monochrome Gaming Suite
 
 An interactive retro pixel machine embedded directly into the developer platform, strictly adhering to a 1-bit monochrome black & white LCD display profile:
 
-1. **Snake II (Snake Xenzia)** — Classic wall-wrapping snake logic with self-collision detection.
-2. **Space Impact** — Side-scrolling retro space shooter with laser beam raycasting against alien waves.
+1. **Snake II (Snake Xenzia)** — Classic wall-wrapping snake logic with self-collision detection and food accumulation.
+2. **Space Impact** — Side-scrolling retro space shooter with laser beam raycasting against alien drone waves.
 3. **Bounce Classic** — Gravity-driven ball physics with restitution bounce mechanics and golden ring collection.
-4. **Diamond Rush** — Underground cave treasure-hunting with boulder physics.
-5. **Bantumi** — Digital adaptation of the traditional Mancala / Congklak pit-sowing game.
-6. **Tetris** — Matrix tetromino falling and line-clearing logic.
-7. **Pocket Carrom** — 2D board friction physics and pocket boundary collision.
-8. **Cricket** — Precision sweetspot bat-swing timing and boundary run scoring.
+4. **Pocket Carrom** — 2D board friction physics, striker aiming angle, and pocket boundary collision.
+5. **Cricket** — Precision sweetspot bat-swing timing and boundary run scoring (Four & Six runs).
+6. **Retro Pong** — The ultimate 1970s paddle arcade game featuring algorithmic AI tracking.
 
 ---
 
@@ -61,7 +59,7 @@ An interactive retro pixel machine embedded directly into the developer platform
 ```text
 code-lab/
 ├── asm_core/
-│   ├── nokia_games_core.asm          # Hardware Assembly logic for 8 Nokia titles
+│   ├── nokia_games_core.asm          # Hardware Assembly logic for Nokia arcade titles
 │   ├── flappy_core.asm               # Fixed-point physics routines
 │   └── badge_verifier.asm            # Low-level commit verification routines
 ├── zig_engine/
@@ -78,7 +76,7 @@ code-lab/
 │   ├── index.html                    # Interface layout
 │   ├── style.css                     # Strict monochrome design system
 │   ├── app.js                        # Client execution bundle
-│   └── nokia_suite.js                # Nokia 8-in-1 retro monochrome runtime
+│   └── nokia_suite.js                # Nokia 6-in-1 retro monochrome runtime
 └── vercel.json                       # Static deployment configuration
 ```
 

@@ -1,6 +1,7 @@
 // =============================================================================
-// Nokia Retro 8-in-1 Monochrome Machine Engine
+// Nokia Retro 6-in-1 Monochrome Machine Engine
 // Pure Black & White (Monochrome Pixel Display Simulation)
+// Fully playable: Snake II, Space Impact, Bounce Classic, Pocket Carrom, Cricket, Pong
 // =============================================================================
 
 class NokiaGameSuite {
@@ -9,9 +10,8 @@ class NokiaGameSuite {
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext('2d');
 
-    this.activeGame = 'snake'; // Default
+    this.activeGame = 'snake';
     this.score = 0;
-    this.hiScore = 0;
     this.isGameOver = false;
 
     // 1. Snake State
@@ -30,7 +30,6 @@ class NokiaGameSuite {
       playerY: 140,
       lasers: [],
       aliens: [],
-      particles: [],
       spawnTimer: 0
     };
 
@@ -40,57 +39,45 @@ class NokiaGameSuite {
       ballY: 150,
       vx: 0,
       vy: 0,
-      rings: [{ x: 180, y: 120, collected: false }, { x: 300, y: 80, collected: false }],
-      door: { x: 420, y: 190, open: false },
-      spikes: [{ x: 230, y: 250 }, { x: 340, y: 250 }]
+      rings: [{ x: 180, y: 140, collected: false }, { x: 320, y: 100, collected: false }],
+      floorY: 240
     };
 
-    // 4. Diamond Rush State
-    this.diamond = {
-      playerX: 2,
-      playerY: 2,
-      gems: [{ x: 5, y: 3 }, { x: 8, y: 6 }, { x: 11, y: 2 }],
-      boulders: [{ x: 5, y: 2 }, { x: 8, y: 5 }],
-      snakes: [{ x: 10, y: 7, dir: 1 }]
-    };
-
-    // 5. Bantumi State
-    this.bantumi = {
-      pits: [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0], // Index 6: P1 store, 13: P2 store
-      turn: 1,
-      selectedPit: 0
-    };
-
-    // 6. Tetris State
-    this.tetris = {
-      board: Array(20).fill(0).map(() => Array(10).fill(0)),
-      piece: { shape: [[1, 1], [1, 1]], x: 4, y: 0 },
-      tick: 0
-    };
-
-    // 7. Pocket Carrom State
+    // 4. Pocket Carrom State
     this.carrom = {
       strikerX: 240,
       strikerY: 230,
-      vx: 0,
-      vy: 0,
+      strikerVx: 0,
+      strikerVy: 0,
       aimAngle: -Math.PI / 2,
       pucks: [
-        { x: 240, y: 140, color: '#fff', vx: 0, vy: 0 },
-        { x: 228, y: 152, color: '#666', vx: 0, vy: 0 },
-        { x: 252, y: 152, color: '#666', vx: 0, vy: 0 }
+        { x: 240, y: 130, vx: 0, vy: 0, inPocket: false, isQueen: true },
+        { x: 226, y: 144, vx: 0, vy: 0, inPocket: false, isQueen: false },
+        { x: 254, y: 144, vx: 0, vy: 0, inPocket: false, isQueen: false },
+        { x: 240, y: 158, vx: 0, vy: 0, inPocket: false, isQueen: false }
       ]
     };
 
-    // 8. Cricket State
+    // 5. Cricket State
     this.cricket = {
       ballX: 420,
       ballY: 150,
       ballVx: -4.5,
-      ballVy: 0.8,
+      ballVy: 0.6,
       batAngle: 0,
-      state: 'bowling', // bowling, hit, miss
-      resultText: ''
+      resultText: '',
+      swung: false
+    };
+
+    // 6. Pong State (Classic Arcade)
+    this.pong = {
+      ballX: 240,
+      ballY: 150,
+      vx: 3.5,
+      vy: 2.2,
+      playerY: 120,
+      aiY: 120,
+      paddleH: 50
     };
 
     this.bindControls();
@@ -105,7 +92,6 @@ class NokiaGameSuite {
     this.resetActiveGame();
     this.updateHUD();
 
-    // Update Tab UI
     document.querySelectorAll('.nokia-tab').forEach((tab) => {
       tab.classList.toggle('is-selected', tab.dataset.game === gameId);
     });
@@ -116,11 +102,9 @@ class NokiaGameSuite {
         snake: 'Snake II (Snake Xenzia)',
         space: 'Space Impact (Alien Shooter)',
         bounce: 'Bounce Classic (Red Ball Adventure)',
-        diamond: 'Diamond Rush (Temple Explorer)',
-        bantumi: 'Bantumi (Traditional Mancala)',
-        tetris: 'Tetris (Geometric Matrix)',
         carrom: 'Pocket Carrom (Monochrome Board)',
-        cricket: 'Cricket (Stroke Timing)'
+        cricket: 'Cricket (Stroke Timing)',
+        pong: 'Pong (Classic Retro Paddle)'
       };
       titleEl.innerText = names[gameId] || gameId;
     }
@@ -142,18 +126,38 @@ class NokiaGameSuite {
       ];
     } else if (this.activeGame === 'bounce') {
       this.bounce.ballX = 60;
-      this.bounce.ballY = 160;
+      this.bounce.ballY = 150;
       this.bounce.vx = 0;
       this.bounce.vy = 0;
       this.bounce.rings.forEach(r => r.collected = false);
-      this.bounce.door.open = false;
+    } else if (this.activeGame === 'carrom') {
+      this.carrom.strikerX = 240;
+      this.carrom.strikerY = 230;
+      this.carrom.strikerVx = 0;
+      this.carrom.strikerVy = 0;
+      this.carrom.aimAngle = -Math.PI / 2;
+      this.carrom.pucks.forEach(p => {
+        p.vx = 0; p.vy = 0; p.inPocket = false;
+      });
+      this.carrom.pucks[0].x = 240; this.carrom.pucks[0].y = 130;
+      this.carrom.pucks[1].x = 226; this.carrom.pucks[1].y = 144;
+      this.carrom.pucks[2].x = 254; this.carrom.pucks[2].y = 144;
+      this.carrom.pucks[3].x = 240; this.carrom.pucks[3].y = 158;
     } else if (this.activeGame === 'cricket') {
       this.cricket.ballX = 420;
       this.cricket.ballY = 150;
       this.cricket.ballVx = -4.5;
       this.cricket.ballVy = 0.6;
-      this.cricket.state = 'bowling';
+      this.cricket.batAngle = 0;
       this.cricket.resultText = '';
+      this.cricket.swung = false;
+    } else if (this.activeGame === 'pong') {
+      this.pong.ballX = 240;
+      this.pong.ballY = 150;
+      this.pong.vx = 3.5;
+      this.pong.vy = 2.0;
+      this.pong.playerY = 120;
+      this.pong.aiY = 120;
     }
   }
 
@@ -215,31 +219,43 @@ class NokiaGameSuite {
         this.space.lasers.push({ x: 70, y: this.space.playerY + 6 });
       }
     } else if (this.activeGame === 'bounce') {
-      if (action === 'left') this.bounce.vx = -3.5;
-      if (action === 'right') this.bounce.vx = 3.5;
+      if (action === 'left') this.bounce.vx = -4.0;
+      if (action === 'right') this.bounce.vx = 4.0;
       if (action === 'up' || action === 'action') {
-        if (this.bounce.ballY >= 238) this.bounce.vy = -8.5; // Jump
+        if (this.bounce.ballY >= 238) this.bounce.vy = -9.0;
+      }
+    } else if (this.activeGame === 'carrom') {
+      if (action === 'left') this.carrom.aimAngle -= 0.15;
+      if (action === 'right') this.carrom.aimAngle += 0.15;
+      if (action === 'action') {
+        // Strike!
+        const force = 9;
+        this.carrom.strikerVx = Math.cos(this.carrom.aimAngle) * force;
+        this.carrom.strikerVy = Math.sin(this.carrom.aimAngle) * force;
       }
     } else if (this.activeGame === 'cricket') {
       if (action === 'action' || action === 'up') {
-        // Swing bat
         this.cricket.batAngle = -Math.PI / 3;
+        this.cricket.swung = true;
         const diff = Math.abs(this.cricket.ballX - 110);
-        if (diff < 12) {
+        if (diff < 14) {
           this.score += 6;
           this.cricket.resultText = 'SIX RUNS!';
-          this.cricket.ballVx = 8;
-          this.cricket.ballVy = -4;
-        } else if (diff < 26) {
+          this.cricket.ballVx = 8.5;
+          this.cricket.ballVy = -4.5;
+        } else if (diff < 28) {
           this.score += 4;
           this.cricket.resultText = 'FOUR RUNS!';
-          this.cricket.ballVx = 6;
-          this.cricket.ballVy = -2;
+          this.cricket.ballVx = 6.5;
+          this.cricket.ballVy = -2.5;
         } else {
           this.cricket.resultText = 'DOT BALL';
         }
         this.updateHUD();
       }
+    } else if (this.activeGame === 'pong') {
+      if (action === 'up') this.pong.playerY = Math.max(10, this.pong.playerY - 25);
+      if (action === 'down') this.pong.playerY = Math.min(240, this.pong.playerY + 25);
     }
   }
 
@@ -256,7 +272,6 @@ class NokiaGameSuite {
           y: (this.snake.body[0].y + this.snake.dir.y + this.snake.gridH) % this.snake.gridH
         };
 
-        // Self collision check
         if (this.snake.body.some((seg, idx) => idx > 0 && seg.x === head.x && seg.y === head.y)) {
           this.isGameOver = true;
           return;
@@ -264,7 +279,6 @@ class NokiaGameSuite {
 
         this.snake.body.unshift(head);
 
-        // Food collision
         if (head.x === this.snake.food.x && head.y === this.snake.food.y) {
           this.score += 10;
           this.spawnSnakeFood();
@@ -274,14 +288,11 @@ class NokiaGameSuite {
         }
       }
     } else if (this.activeGame === 'space') {
-      // Lasers
       this.space.lasers.forEach(l => l.x += 8);
       this.space.lasers = this.space.lasers.filter(l => l.x < 480);
 
-      // Aliens
       this.space.aliens.forEach(a => {
-        a.x -= 1.4;
-        // Collision laser vs alien
+        a.x -= 1.5;
         this.space.lasers.forEach((l, lIdx) => {
           if (l.x >= a.x && l.x <= a.x + 22 && l.y >= a.y && l.y <= a.y + 18) {
             a.hp--;
@@ -303,18 +314,18 @@ class NokiaGameSuite {
         });
       }
     } else if (this.activeGame === 'bounce') {
-      this.bounce.vy += 0.45; // Gravity
+      this.bounce.vy += 0.45;
       this.bounce.ballY += this.bounce.vy;
       this.bounce.ballX += this.bounce.vx;
-      this.bounce.vx *= 0.85;
+      this.bounce.vx *= 0.88;
 
-      // Floor
       if (this.bounce.ballY >= 240) {
         this.bounce.ballY = 240;
         this.bounce.vy = 0;
       }
+      if (this.bounce.ballX < 15) this.bounce.ballX = 15;
+      if (this.bounce.ballX > 465) this.bounce.ballX = 465;
 
-      // Collect rings
       this.bounce.rings.forEach(r => {
         if (!r.collected && Math.hypot(this.bounce.ballX - r.x, this.bounce.ballY - r.y) < 18) {
           r.collected = true;
@@ -322,17 +333,88 @@ class NokiaGameSuite {
           this.updateHUD();
         }
       });
+    } else if (this.activeGame === 'carrom') {
+      // Striker physics
+      this.carrom.strikerX += this.carrom.strikerVx;
+      this.carrom.strikerY += this.carrom.strikerVy;
+      this.carrom.strikerVx *= 0.96;
+      this.carrom.strikerVy *= 0.96;
+
+      // Pucks physics & collision with striker
+      this.carrom.pucks.forEach(p => {
+        if (p.inPocket) return;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.96;
+        p.vy *= 0.96;
+
+        // Striker vs Puck
+        const dist = Math.hypot(this.carrom.strikerX - p.x, this.carrom.strikerY - p.y);
+        if (dist < 18) {
+          p.vx = this.carrom.strikerVx * 0.85;
+          p.vy = this.carrom.strikerVy * 0.85;
+          this.carrom.strikerVx *= -0.4;
+          this.carrom.strikerVy *= -0.4;
+        }
+
+        // Pocket detection (4 corners)
+        const corners = [{ x: 30, y: 30 }, { x: 450, y: 30 }, { x: 30, y: 270 }, { x: 450, y: 270 }];
+        corners.forEach(c => {
+          if (Math.hypot(p.x - c.x, p.y - c.y) < 22) {
+            p.inPocket = true;
+            this.score += p.isQueen ? 50 : 20;
+            this.updateHUD();
+          }
+        });
+      });
     } else if (this.activeGame === 'cricket') {
       this.cricket.ballX += this.cricket.ballVx;
       this.cricket.ballY += this.cricket.ballVy;
 
-      if (this.cricket.ballX < 30 || this.cricket.ballX > 480) {
-        // Reset bowler
+      if (this.cricket.ballX < 20 || this.cricket.ballX > 480) {
         this.cricket.ballX = 420;
         this.cricket.ballY = 150;
         this.cricket.ballVx = -4.5;
         this.cricket.ballVy = 0.6;
         this.cricket.batAngle = 0;
+        this.cricket.swung = false;
+      }
+    } else if (this.activeGame === 'pong') {
+      this.pong.ballX += this.pong.vx;
+      this.pong.ballY += this.pong.vy;
+
+      // Top/bottom bounce
+      if (this.pong.ballY <= 8 || this.pong.ballY >= 292) {
+        this.pong.vy = -this.pong.vy;
+      }
+
+      // Player paddle bounce (Left side x=30)
+      if (this.pong.ballX <= 36 && this.pong.ballY >= this.pong.playerY && this.pong.ballY <= this.pong.playerY + this.pong.paddleH) {
+        this.pong.vx = Math.abs(this.pong.vx) * 1.05;
+        this.score += 10;
+        this.updateHUD();
+      }
+
+      // AI Paddle tracking (Right side x=450)
+      if (this.pong.aiY + this.pong.paddleH / 2 < this.pong.ballY) this.pong.aiY += 2.2;
+      else this.pong.aiY -= 2.2;
+
+      // AI paddle bounce
+      if (this.pong.ballX >= 444 && this.pong.ballY >= this.pong.aiY && this.pong.ballY <= this.pong.aiY + this.pong.paddleH) {
+        this.pong.vx = -Math.abs(this.pong.vx);
+      }
+
+      // Missed left
+      if (this.pong.ballX < 10) {
+        this.isGameOver = true;
+      }
+      // Missed right (Score!)
+      if (this.pong.ballX > 470) {
+        this.score += 50;
+        this.updateHUD();
+        this.pong.ballX = 240;
+        this.pong.ballY = 150;
+        this.pong.vx = -3.5;
       }
     }
   }
@@ -347,12 +429,11 @@ class NokiaGameSuite {
     const w = canvas.width;
     const h = canvas.height;
 
-    // Pure Monochrome Background (Solid Black)
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, w, h);
 
-    // Frame border (Nokia LCD Matrix boundary)
-    ctx.strokeStyle = '#333333';
+    // Border Frame
+    ctx.strokeStyle = '#262626';
     ctx.lineWidth = 1;
     ctx.strokeRect(2, 2, w - 4, h - 4);
 
@@ -360,30 +441,23 @@ class NokiaGameSuite {
       const cellW = w / this.snake.gridW;
       const cellH = h / this.snake.gridH;
 
-      // Draw Snake body (White pixel blocks)
       ctx.fillStyle = '#ffffff';
-      this.snake.body.forEach((seg, idx) => {
+      this.snake.body.forEach(seg => {
         ctx.fillRect(seg.x * cellW + 1, seg.y * cellH + 1, cellW - 2, cellH - 2);
       });
-
-      // Draw Food (Single white pixel dot)
-      ctx.fillStyle = '#ffffff';
       ctx.fillRect(this.snake.food.x * cellW + 2, this.snake.food.y * cellH + 2, cellW - 4, cellH - 4);
 
     } else if (this.activeGame === 'space') {
-      // Spaceship (White vector pixel ship)
       const py = this.space.playerY;
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(40, py + 4, 18, 6);
       ctx.fillRect(52, py, 6, 14);
       ctx.fillRect(58, py + 5, 8, 4);
 
-      // Lasers
       this.space.lasers.forEach(l => {
         ctx.fillRect(l.x, l.y, 8, 2);
       });
 
-      // Aliens
       this.space.aliens.forEach(a => {
         ctx.strokeStyle = '#ffffff';
         ctx.strokeRect(a.x, a.y, 16, 14);
@@ -391,47 +465,77 @@ class NokiaGameSuite {
       });
 
     } else if (this.activeGame === 'bounce') {
-      // Ball
       ctx.fillStyle = '#ffffff';
       ctx.beginPath();
       ctx.arc(this.bounce.ballX, this.bounce.ballY, 10, 0, Math.PI * 2);
       ctx.fill();
 
-      // Floor
       ctx.strokeStyle = '#ffffff';
       ctx.beginPath();
       ctx.moveTo(10, 250);
       ctx.lineTo(w - 10, 250);
       ctx.stroke();
 
-      // Rings
       this.bounce.rings.forEach(r => {
         if (!r.collected) {
           ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2;
           ctx.beginPath();
-          ctx.arc(r.x, r.y, 12, 0, Math.PI * 2);
+          ctx.arc(r.x, r.y, 14, 0, Math.PI * 2);
           ctx.stroke();
         }
       });
+    } else if (this.activeGame === 'carrom') {
+      // Board Corners Pockets
+      const pockets = [{ x: 30, y: 30 }, { x: 450, y: 30 }, { x: 30, y: 270 }, { x: 450, y: 270 }];
+      ctx.strokeStyle = '#555555';
+      pockets.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 16, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+
+      // Striker
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(this.carrom.strikerX, this.carrom.strikerY, 10, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Aim Line
+      ctx.strokeStyle = '#444444';
+      ctx.beginPath();
+      ctx.moveTo(this.carrom.strikerX, this.carrom.strikerY);
+      ctx.lineTo(
+        this.carrom.strikerX + Math.cos(this.carrom.aimAngle) * 35,
+        this.carrom.strikerY + Math.sin(this.carrom.aimAngle) * 35
+      );
+      ctx.stroke();
+
+      // Pucks
+      this.carrom.pucks.forEach(p => {
+        if (!p.inPocket) {
+          ctx.fillStyle = p.isQueen ? '#ffffff' : '#888888';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 8, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
     } else if (this.activeGame === 'cricket') {
-      // Batter
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(100, 180, 12, 38);
-      // Bat
+
       ctx.save();
       ctx.translate(112, 205);
       ctx.rotate(this.cricket.batAngle);
       ctx.fillRect(0, -18, 5, 24);
       ctx.restore();
 
-      // Pitch
       ctx.strokeStyle = '#333333';
       ctx.beginPath();
       ctx.moveTo(40, 220);
       ctx.lineTo(w - 40, 220);
       ctx.stroke();
 
-      // Ball
       ctx.fillStyle = '#ffffff';
       ctx.beginPath();
       ctx.arc(this.cricket.ballX, this.cricket.ballY, 5, 0, Math.PI * 2);
@@ -441,15 +545,25 @@ class NokiaGameSuite {
         ctx.font = '600 13px "Geist Mono", monospace';
         ctx.fillText(this.cricket.resultText, w / 2 - 40, 60);
       }
-    } else {
-      // Generic Nokia Simulation Placeholder for other 4 titles
+    } else if (this.activeGame === 'pong') {
+      // Middle line
+      ctx.strokeStyle = '#222222';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(w / 2, 0);
+      ctx.lineTo(w / 2, h);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Player Paddle
       ctx.fillStyle = '#ffffff';
-      ctx.font = '13px "Geist Mono", monospace';
-      ctx.textAlign = 'center';
-      ctx.fillText(`${this.activeGame.toUpperCase()} READY`, w / 2, h / 2 - 10);
-      ctx.fillStyle = '#666666';
-      ctx.font = '11px "Geist Mono", monospace';
-      ctx.fillText('Nokia 3310 Binary Matrix Routine Loaded', w / 2, h / 2 + 14);
+      ctx.fillRect(30, this.pong.playerY, 6, this.pong.paddleH);
+
+      // AI Paddle
+      ctx.fillRect(444, this.pong.aiY, 6, this.pong.paddleH);
+
+      // Ball
+      ctx.fillRect(this.pong.ballX - 3, this.pong.ballY - 3, 6, 6);
     }
 
     if (this.isGameOver) {
