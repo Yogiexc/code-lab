@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitBadge Hub ⚡ - Panduan Cepat & Generator Medali GitHub</title>
-  <meta name="description" content="Platform panduan interaktif, generator commit co-author, dan speedrun toolkit untuk membuka seluruh medali dan achievements di profil GitHub.">
+  <title>GitBadge Hub - GitHub Achievement Guide & Signature Generator</title>
+  <meta name="description" content="Polyglot architecture reference platform and signature generator for GitHub profile achievements.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,17 +20,33 @@
     <!-- Header -->
     <header class="header">
       <div class="tech-badges-row">
-        <span class="tech-tag tag-asm">⚙️ Assembly x86-64</span>
-        <span class="tech-tag tag-nim">🟡 Nim Systems</span>
-        <span class="tech-tag tag-elixir">🟣 Elixir BEAM</span>
-        <span class="tech-tag tag-v">⚡ V (Vlang)</span>
+        <span class="tech-tag tag-asm">
+          <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
+          Assembly x86-64
+        </span>
+        <span class="tech-tag tag-zig">
+          <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          Zig Systems
+        </span>
+        <span class="tech-tag tag-nim">
+          <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/></svg>
+          Nim Engine
+        </span>
+        <span class="tech-tag tag-elixir">
+          <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Elixir OTP
+        </span>
+        <span class="tech-tag tag-v">
+          <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          V CLI
+        </span>
       </div>
       <h1>
-        Koleksi Medali GitHub <br>
-        <span class="text-gradient">Lebih Cepat, Terarah & Elegan</span>
+        GitBadge Hub <br>
+        <span class="text-gradient">Achievement Engine & Signature Generator</span>
       </h1>
       <p>
-        Panduan speedrun interaktif dan generator commit resmi untuk membuka seluruh GitHub Achievements di profilmu.
+        Platform panduan teknis, simulator milestone, dan generator commit co-author resmi untuk ekosistem profil GitHub.
       </p>
     </header>
 
@@ -38,7 +54,8 @@
     <div class="glass-panel progress-card">
       <div class="progress-header">
         <div class="progress-title">
-          <span>🎯</span> Status Koleksi Medali GitHub Kamu
+          <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          Status Koleksi Achievement Akun
         </div>
         <div class="progress-stats">
           <span id="unlocked-count">4 / 7 Unlocked</span> • <span id="unlocked-percent">57%</span>
@@ -51,11 +68,11 @@
 
     <!-- Interactive Simulator & Generator Grid -->
     <div class="dashboard-grid">
-      <!-- Tool 1: Co-Author Commit Generator (Pair Extraordinaire) -->
+      <!-- Tool 1: Co-Author Commit Generator -->
       <section class="glass-panel">
-        <h2 class="tool-title">🤝 Co-Author Commit Generator</h2>
+        <h2 class="tool-title">Co-Author Commit Generator</h2>
         <p class="tool-desc">
-          Generate format trailer <code>Co-authored-by:</code> yang 100% valid dan sah diverifikasi oleh sistem antrian GitHub.
+          Generate format trailer <code>Co-authored-by:</code> yang sesuai spesifikasi resmi Git trailers dan verifikasi GitHub.
         </p>
 
         <div class="form-group">
@@ -69,7 +86,8 @@
         </div>
 
         <button id="btn-generate-coauthor" class="btn-primary">
-          <span>⚡</span> Generate Kode Commit
+          <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Generate Command Trailer
         </button>
 
         <div class="output-box">
@@ -79,26 +97,26 @@ git push origin feature-branch</pre>
         </div>
       </section>
 
-      <!-- Tool 2: Tier Simulator (Pull Shark & Galaxy Brain) -->
+      <!-- Tool 2: Tier Simulator -->
       <section class="glass-panel">
-        <h2 class="tool-title">🎚️ Achievement Tier Simulator</h2>
+        <h2 class="tool-title">Achievement Tier Simulator</h2>
         <p class="tool-desc">
-          Hitung progres tier medali kamu (Bronze, Silver x2, hingga Gold x3).
+          Kalkulasi real-time ambang batas milestone (Bronze, Silver Tier 2, hingga Gold Tier 3).
         </p>
 
         <div class="form-group">
-          <label for="input-pr-count">🦈 Jumlah Pull Request yang Sudah Di-Merge</label>
+          <label for="input-pr-count">Total Pull Request Merged (Pull Shark)</label>
           <input type="number" id="input-pr-count" class="form-input" value="16" min="0">
           <div style="margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600;">
-            Status: <span id="pr-tier-badge" style="color: #93c5fd;">Silver Tier (x2) - Hunter Shark 🦈</span>
+            Status: <span id="pr-tier-badge" style="color: #93c5fd;">Silver Tier (x2) - 16 PRs Merged</span>
           </div>
         </div>
 
         <div class="form-group" style="margin-top: 1.5rem;">
-          <label for="input-qa-count">🧠 Jumlah Jawaban Q&A Discussions Terjawab</label>
+          <label for="input-qa-count">Total Jawaban Discussions Disetujui (Galaxy Brain)</label>
           <input type="number" id="input-qa-count" class="form-input" value="2" min="0">
           <div style="margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600;">
-            Status: <span id="qa-tier-badge" style="color: #34d399;">Bronze Tier (x1) - Galaxy Novice 💡</span>
+            Status: <span id="qa-tier-badge" style="color: #34d399;">Bronze Tier (x1) - 2 Answers Accepted</span>
           </div>
         </div>
       </section>
@@ -107,20 +125,21 @@ git push origin feature-branch</pre>
     <!-- Badges Catalog & Guides -->
     <section class="badges-section">
       <h2 class="section-title">
-        <span>🏆</span> Direktori Speedrun Medali GitHub
+        <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Direktori Spesifikasi Achievement
       </h2>
 
       <!-- Dynamic Badges Grid -->
       <div class="badge-grid" id="badge-grid-container">
-        <!-- Rendered dynamically by app.js with local storage checklist -->
+        <!-- Rendered with pure SVG icons by app.js -->
       </div>
     </section>
 
     <!-- Footer -->
     <footer>
       <p>
-        Inisiatif eksperimental oleh <a href="https://github.com/Yogiexc" target="_blank">Bryan Yogie (@Yogiexc)</a> 
-        • Ditenagai oleh <strong>Assembly x86-64, Nim, Elixir, & Vlang</strong> • Live di <strong>Vercel</strong>.
+        Engineering Project by <a href="https://github.com/Yogiexc" target="_blank">Bryan Yogie (@Yogiexc)</a> 
+        • Architecture: <strong>Assembly x86-64, Zig, Nim, Elixir, & V</strong> • Infrastructure: <strong>Vercel</strong>.
       </p>
     </footer>
   </div>

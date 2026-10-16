@@ -1,99 +1,87 @@
-# GitBadge Hub ⚡
+# GitBadge Hub
 
-> **The Ultimate Polyglot GitHub Achievement Speedrunner & Architecture Lab**  
-> Menggabungkan spektrum lengkap pemrograman komputer: dari **Hardware Machine Code (Assembly x86-64)**, **Low-Level Manual Memory (Zig)**, hingga **High-Level Concurrency (Elixir)** dan **Systems Transpilation (Nim & Vlang)**.
-
----
-
-🔗 **Live Platform Demo:** [https://code-lab-five-cyan.vercel.app/](https://code-lab-five-cyan.vercel.app/)
+> **Polyglot Systems Architecture & GitHub Achievement Reference Platform**  
+> A full-spectrum computational lab integrating hardware machine instructions (x86-64 Assembly), manual memory control (Zig), native systems compilation (Nim, V), and distributed concurrency (Elixir).
 
 ---
 
-## 🏗️ Spektrum Arsitektur Polyglot (Low-Level ke High-Level)
-
-Repository ini dirancang secara modular dengan membagi tugas ke bahasa yang paling optimal sesuai tingkatannya:
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        SPEKTRUM ARSITEKTUR                              │
-├──────────────────────────┬──────────────┬──────────────────────────────┤
-│ Tingkatan Bahasa         │ Bahasa       │ Tugas / Tanggung Jawab       │
-├──────────────────────────┼──────────────┼──────────────────────────────┤
-│ 1. Machine Instructions  │ ⚙️ Assembly   │ x86-64 register SHA-1 & bit  │
-│    (Tingkat Paling Rendah)│    (NASM)    │ popcount verification        │
-│ 2. Manual Memory Systems │ ⚡ Zig       │ Zero-overhead memory buffer  │
-│                          │              │ & signature validation       │
-│ 3. Native Fast CLI       │ 🔵 V (Vlang) │ Utilitas terminal kilat      │
-│ 4. Transpiled Systems    │ 🟡 Nim       │ Core generator & compiled    │
-│                          │              │ Web Engine (Vercel deploy)   │
-│ 5. Distributed / Concur. │ 🟣 Elixir    │ BEAM VM orchestrator & batch │
-│    (Tingkat Paling Tinggi)│   (OTP)      │ sync window calculator       │
-└──────────────────────────┴──────────────┴──────────────────────────────┘
-```
+[Live Deployment (Vercel)](https://code-lab-five-cyan.vercel.app/) • [Source Code (GitHub)](https://github.com/Yogiexc/code-lab)
 
 ---
 
-## 🌟 Fitur Utama Platform
+## Architectural Matrix (Low-Level to High-Level)
 
-1. **🤝 Co-Author Commit Generator:**  
-   Generate trailer `Co-authored-by:` standar GitHub secara instan untuk membuka medali **Pair Extraordinaire**.
-2. **🎯 Interactive Progress Tracker & Confetti Effect:**  
-   Lacak progres koleksi medali kamu secara visual dengan persistensi browser (*Local Storage*) dan animasi confetti real-time.
-3. **🎚️ Achievement Tier Simulator:**  
-   Hitung progres real-time menuju Bronze, Silver (x2), dan Gold (x3) untuk medali **Pull Shark** dan **Galaxy Brain**.
-4. **🏆 Direktori Speedrun Medali GitHub:**  
-   Panduan praktis tercepat untuk membuka:
-   - 🤠 **Quickdraw** (< 5 Menit)
-   - 🦈 **Pull Shark** (Level 1, 2, 3)
-   - 🧠 **Galaxy Brain** (Q&A Discussions)
-   - 🤝 **Pair Extraordinaire** (Co-Author)
-   - 🚀 **YOLO** (Merge tanpa review)
-   - 💖 **Public Sponsor** ($1 Tier)
-   - ⭐ **Starstruck** (16 Stars)
+The project structure organizes responsibilities by abstraction layer, allocating tasks to the most suitable compiler and runtime environment:
+
+| Layer | Language / Toolchain | Module Path | Responsibility |
+| :--- | :--- | :--- | :--- |
+| **Hardware / Machine** | x86-64 Assembly (NASM) | `asm_core/badge_verifier.asm` | Direct CPU register operations, fast SHA-1 parsing, hardware POPCNT instructions |
+| **Manual Systems** | Zig (0.13+) | `zig_engine/badge_memory_engine.zig` | Manual memory allocation, zero-overhead buffers, signature verification |
+| **Native Fast CLI** | V (Vlang) | `cli_tool/main.v` | High-speed standalone terminal utility for querying badge criteria |
+| **Transpiled Systems** | Nim (2.0+) | `src/app.nim`, `src/badge_engine.nim` | Core mathematical evaluation logic transpiled directly to web JavaScript |
+| **Distributed / OTP** | Elixir (BEAM VM) | `elixir_core/` | Asynchronous queue orchestration, regex validation, batch window estimation |
 
 ---
 
-## 📁 Struktur Direktori Proyek
+## Core Capabilities
+
+1. **Co-Authored-By Signature Generator**  
+   Produces strictly compliant Git commit trailer metadata according to GitHub contribution verification standards.
+2. **Achievement Milestone Simulator**  
+   Real-time progress calculation across Bronze, Silver (Tier 2), and Gold (Tier 3) milestones for Pull Request and Discussion answer thresholds.
+3. **Speedrun Operational Guides**  
+   Reference operational steps for unlocking public achievements:
+   - Quickdraw
+   - Pull Shark
+   - Galaxy Brain
+   - Pair Extraordinaire
+   - YOLO
+   - Public Sponsor
+   - Starstruck
+
+---
+
+## Repository Directory Layout
 
 ```text
 code-lab/
-├── 📁 asm_core/              # x86-64 Assembly Machine Instructions
-│   └── badge_verifier.asm    # Bitwise permutation & POPCNT verification
-├── 📁 zig_engine/            # Low-Level Zig Memory Management
-│   └── badge_memory_engine.zig
-├── 📁 cli_tool/              # High-Speed Terminal CLI
-│   └── main.v                # Vlang CLI binary source
-├── 📁 elixir_core/           # BEAM High Concurrency Orchestrator
-│   ├── mix.exs
-│   └── lib/gitbadge/orchestrator.ex
-├── 📁 src/                   # Nim Systems Web Engine
-│   ├── app.nim               # Frontend interactive logic
-│   └── badge_engine.nim      # Tier evaluation rules
-├── 📁 public/                # Static Web Assets (Deployed to Vercel)
-│   ├── index.html            # Dark Glassmorphism interface
-│   ├── style.css             # Ambient glow mesh & animations
-│   └── app.js                # Compiled interactive engine
-└── vercel.json               # Vercel deployment configuration
+├── asm_core/
+│   └── badge_verifier.asm            # Low-level assembly routines
+├── zig_engine/
+│   └── badge_memory_engine.zig       # Manual memory safety layer
+├── cli_tool/
+│   └── main.v                        # Standalone terminal executable source
+├── elixir_core/
+│   ├── mix.exs                       # OTP application configuration
+│   └── lib/gitbadge/orchestrator.ex  # Distributed pipeline module
+├── src/
+│   ├── app.nim                       # Core client logic
+│   └── badge_engine.nim              # Achievement rule definitions
+├── public/
+│   ├── index.html                    # Interface layout
+│   ├── style.css                     # Design system and layout tokens
+│   └── app.js                        # Client execution bundle
+└── vercel.json                       # Static deployment configuration
 ```
 
 ---
 
-## 🚀 Menjalankan Secara Lokal
+## Local Development & Compilation
 
-### 1. Web Platform
+### Web Application
 ```bash
-# Jalankan web server lokal
+# Serve public distribution folder locally
 npx serve public
 ```
 
-### 2. Mengompilasi Kode Nim ke Web JavaScript
+### Compile Nim to Web Target
 ```bash
 nim js -d:release -o:public/app.js src/app.nim
 ```
 
 ---
 
-## 👥 Kolaborator & Kontributor
+## Authors & Maintainers
 - **Bryan Yogie Saputra** ([@Yogiexc](https://github.com/Yogiexc))
 - **Ranu Prasetya** ([@Aytsrp](https://github.com/Aytsrp))
-- **GitHub Actions Bot** ([`github-actions[bot]`](https://github.com/apps/github-actions))
+- **GitHub Actions Automation** ([`github-actions[bot]`](https://github.com/apps/github-actions))
