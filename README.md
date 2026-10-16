@@ -1,6 +1,6 @@
 # GitBadge Hub
 
-> **Polyglot Systems Architecture & Nokia Retro Monochrome Gaming Suite**  
+> **Polyglot Systems Architecture, Nokia Retro Gaming Lab & UNIX Console Platform**  
 > A full-spectrum computational lab integrating hardware machine instructions (x86-64 Assembly), manual memory control (Zig), native systems compilation (Nim, V), and distributed concurrency (Elixir).
 
 ---
@@ -11,11 +11,11 @@
 
 ## Architectural Matrix (Low-Level to High-Level)
 
-The project structure organizes responsibilities by abstraction layer, allocating tasks to the most suitable compiler and runtime environment:
+The project structure organizes computational responsibilities by abstraction layer, allocating tasks to the most suitable compiler and runtime environment:
 
 | Layer | Language / Toolchain | Module Path | Responsibility |
 | :--- | :--- | :--- | :--- |
-| **Hardware / Machine** | x86-64 Assembly (NASM) | `asm_core/nokia_games_core.asm` | Low-level ALU bitwise state machines for retro Nokia arcade games & commit verification |
+| **Hardware / Machine** | x86-64 Assembly (NASM) | `asm_core/nokia_games_core.asm` | Low-level ALU bitwise state machines for retro arcade engines & commit verification |
 | **Manual Systems** | Zig (0.13+) | `zig_engine/badge_memory_engine.zig` | Manual memory allocation, zero-overhead buffers, signature verification |
 | **Native Fast CLI** | V (Vlang) | `cli_tool/main.v` | High-speed standalone terminal utility for querying badge criteria |
 | **Transpiled Systems** | Nim (2.0+) | `src/app.nim`, `src/badge_engine.nim` | Core mathematical evaluation logic transpiled directly to web JavaScript |
@@ -23,34 +23,32 @@ The project structure organizes responsibilities by abstraction layer, allocatin
 
 ---
 
-## Nokia Retro 6-in-1 Monochrome Gaming Suite
+## Platform Features
 
-An interactive retro pixel machine embedded directly into the developer platform, strictly adhering to a 1-bit monochrome black & white LCD display profile:
+### 1. Retro Monochrome Gaming Suite (6-in-1)
+Embedded retro gaming machine strictly adhering to a 1-bit monochrome black-and-white LCD display matrix:
+- **Snake II (Snake Xenzia)** — Wall-wrapping coordinate logic with body collision detection.
+- **Space Impact** — Side-scrolling retro shooter with laser raycasting against alien waves.
+- **Bounce Classic** — Gravity-driven ball physics with restitution bounce mechanics and golden ring collection.
+- **Pocket Carrom** — 2D board friction deceleration, angular aiming, and corner pocket boundary checks.
+- **Cricket** — Bat-swing timing evaluation window for boundary scoring (Four & Six runs).
+- **Retro Pong** — Two-paddle table tennis arcade game with automated paddle tracking.
 
-1. **Snake II (Snake Xenzia)** — Classic wall-wrapping snake logic with self-collision detection and food accumulation.
-2. **Space Impact** — Side-scrolling retro space shooter with laser beam raycasting against alien drone waves.
-3. **Bounce Classic** — Gravity-driven ball physics with restitution bounce mechanics and golden ring collection.
-4. **Pocket Carrom** — 2D board friction physics, striker aiming angle, and pocket boundary collision.
-5. **Cricket** — Precision sweetspot bat-swing timing and boundary run scoring (Four & Six runs).
-6. **Retro Pong** — The ultimate 1970s paddle arcade game featuring algorithmic AI tracking.
+### 2. Audio & Visual Authenticity
+- **Nokia 3310 Monophonic Synthesizer:** Pure Web Audio API square-wave oscillator generating 8-bit sound FX and the legendary *Nokia Tune (Gran Vals)* without external audio dependencies.
+- **LCD Display Filter:** Real-time toggle between Pure Monochrome (`#000000`/`#ffffff`) and Classic Nokia 3310 Phosphor Green LCD matrix mode.
 
----
+### 3. Live GitHub Profile Inspector & ASCII Receipt
+- Real-time GitHub REST API audit inspecting repositories, stars, and achievement eligibility.
+- Built-in ASCII receipt printer formatting a retro terminal verification slip.
 
-## Core Platform Capabilities
+### 4. Interactive UNIX Terminal Console
+- Global Quake-style drop-down console triggered by pressing the backquote key (` ` `) or via the navigation bar.
+- Interactive commands: `help`, `arch`, `games`, `badges`, `tune`, `whoami`, `clear`, and `exit`.
 
-1. **Co-Authored-By Signature Generator**  
-   Produces strictly compliant Git commit trailer metadata according to GitHub contribution verification standards.
-2. **Achievement Milestone Simulator**  
-   Real-time progress calculation across Bronze, Silver (Tier 2), and Gold (Tier 3) milestones for Pull Request and Discussion answer thresholds.
-3. **Speedrun Operational Guides**  
-   Reference operational steps for unlocking public achievements:
-   - Quickdraw
-   - Pull Shark
-   - Galaxy Brain
-   - Pair Extraordinaire
-   - YOLO
-   - Public Sponsor
-   - Starstruck
+### 5. Signature & Milestone Workbench
+- **Co-Authored-By Generator:** Produces RFC-compliant Git trailers for collaborative achievements.
+- **Milestone Threshold Calculator:** Real-time progression estimation for tiered badges (Bronze, Silver, Gold).
 
 ---
 
@@ -59,7 +57,8 @@ An interactive retro pixel machine embedded directly into the developer platform
 ```text
 code-lab/
 ├── asm_core/
-│   ├── nokia_games_core.asm          # Hardware Assembly logic for Nokia arcade titles
+│   ├── nokia_games_core.asm          # Hardware Assembly logic for 6 retro titles
+│   ├── metal_slug_core.asm           # Side-scrolling ballistics routines
 │   ├── flappy_core.asm               # Fixed-point physics routines
 │   └── badge_verifier.asm            # Low-level commit verification routines
 ├── zig_engine/
@@ -76,8 +75,26 @@ code-lab/
 │   ├── index.html                    # Interface layout
 │   ├── style.css                     # Strict monochrome design system
 │   ├── app.js                        # Client execution bundle
-│   └── nokia_suite.js                # Nokia 6-in-1 retro monochrome runtime
+│   ├── nokia_audio.js                # Web Audio API 8-bit synthesizer
+│   ├── nokia_suite.js                # 6-in-1 retro gaming runtime
+│   ├── profile_inspector.js          # REST API audit & ASCII receipt printer
+│   └── terminal_console.js           # Interactive UNIX shell overlay
 └── vercel.json                       # Static deployment configuration
+```
+
+---
+
+## Local Development & Compilation
+
+### Web Application
+```bash
+# Serve public distribution folder locally
+npx serve public
+```
+
+### Compile Nim to Web Target
+```bash
+nim js -d:release -o:public/app.js src/app.nim
 ```
 
 ---
