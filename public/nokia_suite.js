@@ -2,6 +2,9 @@
 // Nokia Retro 6-in-1 Monochrome Machine Engine
 // Pure Black & White (Monochrome Pixel Display Simulation)
 // Fully playable: Snake II, Space Impact, Bounce Classic, Pocket Carrom, Cricket, Pong
+//
+// Collaborative update: added high-score persistence via localStorage
+// Co-authored by: Ranu Prasetya (@Aytsrp)
 // =============================================================================
 
 class NokiaGameSuite {
@@ -428,6 +431,13 @@ class NokiaGameSuite {
   updateHUD() {
     const sEl = document.getElementById('nokia-score');
     if (sEl) sEl.innerText = this.score;
+
+    // Persist high score per game to localStorage
+    const key = `nokia_hiscore_${this.activeGame}`;
+    const prev = parseInt(localStorage.getItem(key) || '0', 10);
+    if (this.score > prev) {
+      localStorage.setItem(key, this.score);
+    }
   }
 
   draw() {
