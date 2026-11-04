@@ -122,7 +122,17 @@ drwxr-xr-x  public/       (Vercel Web Frontend)
         }
         if (row.trim()) out += row;
         return out.trimEnd();
-      },
+      },      banner: () => `
+  ____ _ _   ____            _             _   _       _     
+ / ___(_) |_| __ )  __ _  __| | __ _  ___ | | | |_   _| |__  
+| |  _| | __|  _ \ / _` |/ _` |/ _` |/ _ \| |_| | | | | '_ \ 
+| |_| | | |_| |_) | (_| | (_| | (_| |  __/|  _  | |_| | |_) |
+ \____|_|\__|____/ \__,_|\__,_|\__, |\___||_| |_|\__,_|_.__/ 
+                               |___/                         
+       GitHub Achievements & Retro Polyglot Arcade`,
+
+      echo: () => 'echo: usage: echo <text>',
+
 
 
 
