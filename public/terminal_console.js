@@ -66,6 +66,8 @@ STATUS    : Operational (Vercel Live CDN)`,
         if (out) out.innerHTML = '';
         return null;
       },
+      echo: (args) => args || '(empty)',
+
 
       exit: () => {
         this.toggle(false);
