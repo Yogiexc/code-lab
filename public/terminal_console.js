@@ -96,7 +96,17 @@ STATUS    : Operational (Vercel Live CDN)`,
         const timeStr = h > 0 ? `${h}h ${m % 60}m ${s % 60}s` : m > 0 ? `${m}m ${s % 60}s` : `${s}s`;
         const time = now.toLocaleTimeString();
         return `${time}  up ${timeStr},  1 user,  load average: 0.12, 0.08, 0.05`;
-      },
+      },      pwd: () => '/home/yogiexc/code-lab',
+
+      ls: () => `drwxr-xr-x  asm_core/     (x86-64 Machine Assembly)
+drwxr-xr-x  zig_engine/   (Zig Memory Allocator)
+drwxr-xr-x  elixir_core/  (Elixir OTP Orchestrator)
+drwxr-xr-x  cli_tool/     (Vlang Fast CLI)
+drwxr-xr-x  src/          (Nim JS Core)
+drwxr-xr-x  public/       (Vercel Web Frontend)
+-rw-r--r--  README.md     (Documentation)
+-rw-r--r--  vercel.json   (Deployment Spec)`,
+
 
 
 
