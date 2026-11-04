@@ -12,6 +12,7 @@ class UnixTerminalOverlay {
       help: () => `
 Available system commands:
   help        - List all terminal commands
+  neofetch    - Display system info in ASCII art style
   arch        - Display polyglot hardware & runtime layers
   games       - List all 6 Nokia retro arcade engines
   badges      - Query audit criteria for all 7 GitHub achievements
@@ -60,6 +61,20 @@ USER      : Bryan Yogie Saputra (@Yogiexc)
 ROLE      : Lead Systems & Web Architect
 PLATFORM  : code-lab / GitBadge Hub
 STATUS    : Operational (Vercel Live CDN)`,
+
+      neofetch: () => `
+        .dOOOOOOOOk.      yogiexc@codelab
+       dOOOOOOOOOOOOb     ---------------
+      dOOOOOOOOOOOOOOb    OS      : GitBadge Hub v2.4 (Vercel CDN)
+     dOOOOOOOOOOOOOOOk    Host    : code-lab (Yogiexc/code-lab)
+     OOOOOOOOOOOOOOOOk    Kernel  : x86-64 ASM + Zig + Nim + Elixir
+     OOOOOOOOOOOOOOOOk    Shell   : UNIX Console (sh) v2.4.0
+     OOOOOOOOOOOOOOOOk    Games   : Nokia Suite 6-in-1 (Monochrome)
+     'OOOOOOOOOOOOOOk'    Audio   : Web Audio API (Square Wave OSC)
+      'OOOOOOOOOOOO'       Langs   : x86-64 ASM / Zig / Nim / Elixir / V
+        'OOOOOOOO'         Memory  : Manual (Zig allocator)
+          'OOOO'           Display : 1-bit Monochrome LCD Matrix
+                           Medali  : Quickdraw | Pull Shark x2 | YOLO | Galaxy Brain`,
 
       clear: () => {
         const out = document.getElementById('term-output');
