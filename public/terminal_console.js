@@ -12,6 +12,7 @@ class UnixTerminalOverlay {
       help: () => `
 Available system commands:
   help        - List all terminal commands
+  fortune     - Display a random developer wisdom quote
   arch        - Display polyglot hardware & runtime layers
   games       - List all 6 Nokia retro arcade engines
   badges      - Query audit criteria for all 7 GitHub achievements
@@ -66,6 +67,20 @@ STATUS    : Operational (Vercel Live CDN)`,
         if (out) out.innerHTML = '';
         return null;
       },
+      fortune: () => {
+        const quotes = [
+          `"Talk is cheap. Show me the code." — Linus Torvalds`,
+          `"Make it work, make it right, make it fast." — Kent Beck`,
+          `"Code is like humor. When you have to explain it, it's bad." — Cory House`,
+          `"First, solve the problem. Then, write the code." — John Johnson`,
+          `"Debugging is twice as hard as writing the code in the first place." — Brian Kernighan`,
+          `"The best error message is the one that never shows up." — Thomas Fuchs`,
+          `"Simplicity is the soul of efficiency." — Austin Freeman`,
+          `"Programs must be written for people to read." — Harold Abelson`,
+        ];
+        return quotes[Math.floor(Math.random() * quotes.length)];
+      },
+
 
       exit: () => {
         this.toggle(false);
