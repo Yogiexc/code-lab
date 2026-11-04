@@ -66,6 +66,23 @@ STATUS    : Operational (Vercel Live CDN)`,
         if (out) out.innerHTML = '';
         return null;
       },
+      date: () => new Date().toLocaleString('id-ID', { weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit', timeZoneName:'short' }),
+
+      cal: () => {
+        const d = new Date(); const yr = d.getFullYear(); const mo = d.getMonth();
+        const days = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+        const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        let out = `    ${months[mo]} ${yr}\n ${days.join(' ')}\n`; let cur = 1;
+        const first = new Date(yr, mo, 1).getDay(); const last = new Date(yr, mo+1, 0).getDate();
+        let row = ' '.repeat(first * 3);
+        for (let i = first; cur <= last; i++) {
+          row += (cur === d.getDate() ? `[${String(cur).padStart(2,'0')}]` : String(cur).padStart(2,' ') + ' ');
+          if ((i + 1) % 7 === 0) { out += row.trimEnd() + '\n'; row = ''; }
+          cur++;
+        }
+        if (row.trim()) out += row; return out.trimEnd();
+      },
+
 
       exit: () => {
         this.toggle(false);
