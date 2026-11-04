@@ -86,7 +86,18 @@ STATUS    : Operational (Vercel Live CDN)`,
           '"Simplicity is the soul of efficiency." — Austin Freeman',
         ];
         return q[Math.floor(Math.random() * q.length)];
+      },      uptime: () => {
+        const now = new Date();
+        const boot = window._termBootTime || (window._termBootTime = now);
+        const ms = now - boot;
+        const s = Math.floor(ms / 1000);
+        const m = Math.floor(s / 60);
+        const h = Math.floor(m / 60);
+        const timeStr = h > 0 ? `${h}h ${m % 60}m ${s % 60}s` : m > 0 ? `${m}m ${s % 60}s` : `${s}s`;
+        const time = now.toLocaleTimeString();
+        return `${time}  up ${timeStr},  1 user,  load average: 0.12, 0.08, 0.05`;
       },
+
 
 
       clear: () => {
