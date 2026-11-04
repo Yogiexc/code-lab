@@ -131,7 +131,19 @@ drwxr-xr-x  public/       (Vercel Web Frontend)
                                |___/                         
        GitHub Achievements & Retro Polyglot Arcade`,
 
-      echo: () => 'echo: usage: echo <text>',
+      echo: () => 'echo: usage: echo <text>',      matrix: () => {
+        const chars = '01??????????0123456789ABCDEF';
+        let stream = '';
+        for (let r = 0; r < 8; r++) {
+          let line = '';
+          for (let c = 0; c < 36; c++) {
+            line += chars[Math.floor(Math.random() * chars.length)] + ' ';
+          }
+          stream += line.trimEnd() + '\n';
+        }
+        return `[MATRIX STREAM INITIALIZED]\n` + stream.trimEnd();
+      },
+
 
 
 
