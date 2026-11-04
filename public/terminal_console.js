@@ -81,6 +81,20 @@ STATUS    : Operational (Vercel Live CDN)`,
         if (out) out.innerHTML = '';
         return null;
       },
+      cowsay: () => {
+        const msgs = [
+          'git commit -m "moo"',
+          'Push to main? Moooo-ve fast!',
+          'Have you pulled today?',
+          'Merge conflicts make me sad :(',
+          'Ship it! Moo.',
+          'Stay curious. Keep coding!',
+        ];
+        const msg = msgs[Math.floor(Math.random() * msgs.length)];
+        const bar = '-'.repeat(msg.length + 2);
+        return ` +${bar}+\n | ${msg} |\n +${bar}+\n       \\   ^__^\n        \\  (oo)\\_______\n           (__)\\       )\\/\\\n               ||----w |\n               ||     ||`;
+      },
+
 
       exit: () => {
         this.toggle(false);
