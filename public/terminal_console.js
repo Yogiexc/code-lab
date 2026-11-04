@@ -158,7 +158,7 @@ STATUS    : Operational (Vercel Live CDN)`,
           <button id="btn-close-term" class="term-close-btn">&times;</button>
         </div>
         <div id="term-output" class="term-body">
-          <div class="term-line">GitBadge Hub Polyglot Kernel v2.4.0 (x86_64-nasm-nim-elixir)</div>
+          <div class="term-line">GitBadge Hub Polyglot Kernel v2.4.1 [RELOADED] (x86_64-nasm-nim-elixir)</div>
           <div class="term-line">Type <span class="term-hl">'help'</span> for a list of internal runtime commands.</div>
         </div>
         <div class="term-input-row">
