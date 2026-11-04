@@ -61,6 +61,73 @@ ROLE      : Lead Systems & Web Architect
 PLATFORM  : code-lab / GitBadge Hub
 STATUS    : Operational (Vercel Live CDN)`,
 
+      neofetch: () => [
+        "        .dOOOOOOOOk.      yogiexc@codelab",
+        "       dOOOOOOOOOOOOb     ---------------",
+        "      dOOOOOOOOOOOOOOb    OS      : GitBadge Hub v2.4 (Vercel CDN)",
+        "     dOOOOOOOOOOOOOOOk    Host    : code-lab (Yogiexc/code-lab)",
+        "     OOOOOOOOOOOOOOOOk    Kernel  : x86-64 ASM + Zig + Nim + Elixir",
+        "     OOOOOOOOOOOOOOOOk    Shell   : UNIX Console (sh) v2.4.0",
+        "     OOOOOOOOOOOOOOOOk    Games   : Nokia Suite 6-in-1 (Monochrome)",
+        "     'OOOOOOOOOOOOOOk'    Audio   : Web Audio API (Square Wave OSC)",
+        "      'OOOOOOOOOOOO'       Langs   : x86-64 ASM / Zig / Nim / Elixir / V",
+        "        'OOOOOOOO'         Memory  : Manual (Zig allocator)",
+        "          'OOOO'           Display : 1-bit Monochrome LCD Matrix",
+        "                           Medali  : Quickdraw | Pull Shark x2 | YOLO | Galaxy Brain"
+      ].join('\n'),
+
+      cowsay: () => [
+        " __________________________________",
+        "< GitBadge Hub: Push to main! Moo! >",
+        " ----------------------------------",
+        "        \   ^__^",
+        "         \  (oo)\_______",
+        "            (__)\\       )\\/\\",
+        "                ||----w |",
+        "                ||     ||"
+      ].join('\n'),
+
+      fortune: () => {
+        const q = [
+          '"Talk is cheap. Show me the code." — Linus Torvalds',
+          '"Make it work, make it right, make it fast." — Kent Beck',
+          '"Code is like humor. When you have to explain it, its bad." — Cory House',
+          '"First, solve the problem. Then, write the code." — John Johnson',
+          '"Debugging is twice as hard as writing the code." — Brian Kernighan'
+        ];
+        return q[Math.floor(Math.random() * q.length)];
+      },
+
+      matrix: () => {
+        const hex = "0123456789ABCDEF";
+        let out = "[MATRIX DIGITAL RAIN STREAM]\n";
+        for (let i = 0; i < 6; i++) {
+          let line = "";
+          for (let j = 0; j < 24; j++) line += hex[Math.floor(Math.random() * 16)] + " ";
+          out += line.trimEnd() + "\n";
+        }
+        return out.trimEnd();
+      },
+
+      uptime: () => {
+        const now = new Date();
+        const boot = window._termBootTime || (window._termBootTime = now);
+        const s = Math.floor((now - boot) / 1000);
+        const m = Math.floor(s / 60);
+        return now.toLocaleTimeString() + "  up " + (m > 0 ? m + "m " : "") + (s % 60) + "s, 1 user, load avg: 0.12";
+      },
+
+      ls: () => [
+        "drwxr-xr-x  asm_core/     (x86-64 Machine Assembly)",
+        "drwxr-xr-x  zig_engine/   (Zig Memory Allocator)",
+        "drwxr-xr-x  elixir_core/  (Elixir OTP Orchestrator)",
+        "drwxr-xr-x  cli_tool/     (Vlang Fast CLI)",
+        "drwxr-xr-x  src/          (Nim JS Core)",
+        "drwxr-xr-x  public/       (Vercel Web Frontend)",
+        "-rw-r--r--  README.md     (Documentation)",
+        "-rw-r--r--  vercel.json   (Deployment Spec)"
+      ].join('\n'),
+
       clear: () => {
         const out = document.getElementById('term-output');
         if (out) out.innerHTML = '';
