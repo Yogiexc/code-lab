@@ -13,6 +13,13 @@ class UnixTerminalOverlay {
 Available system commands:
   help        - List all terminal commands
   neofetch    - Display system info in ASCII art style
+  cowsay      - ASCII talking cow
+  fortune     - Random developer wisdom quotes
+  matrix      - Digital stream green rain simulation
+  banner      - Stylized GitBadge Hub ASCII title
+  uptime      - Session active duration and load average
+  ls / pwd    - Inspect internal repository architecture
+  date / cal  - Current date string and calendar visualizer
   arch        - Display polyglot hardware & runtime layers
   games       - List all 6 Nokia retro arcade engines
   badges      - Query audit criteria for all 7 GitHub achievements
