@@ -12,14 +12,6 @@ class UnixTerminalOverlay {
       help: () => `
 Available system commands:
   help        - List all terminal commands
-  neofetch    - Display system info in ASCII art style
-  cowsay      - ASCII talking cow
-  fortune     - Random developer wisdom quotes
-  matrix      - Digital stream green rain simulation
-  banner      - Stylized GitBadge Hub ASCII title
-  uptime      - Session active duration and load average
-  ls / pwd    - Inspect internal repository architecture
-  date / cal  - Current date string and calendar visualizer
   arch        - Display polyglot hardware & runtime layers
   games       - List all 6 Nokia retro arcade engines
   badges      - Query audit criteria for all 7 GitHub achievements
@@ -69,113 +61,11 @@ ROLE      : Lead Systems & Web Architect
 PLATFORM  : code-lab / GitBadge Hub
 STATUS    : Operational (Vercel Live CDN)`,
 
-      neofetch: () => `
-        .dOOOOOOOOk.      yogiexc@codelab
-       dOOOOOOOOOOOOb     ---------------
-      dOOOOOOOOOOOOOOb    OS      : GitBadge Hub v2.4 (Vercel CDN)
-     dOOOOOOOOOOOOOOOk    Host    : code-lab (Yogiexc/code-lab)
-     OOOOOOOOOOOOOOOOk    Kernel  : x86-64 ASM + Zig + Nim + Elixir
-     OOOOOOOOOOOOOOOOk    Shell   : UNIX Console (sh) v2.4.0
-     OOOOOOOOOOOOOOOOk    Games   : Nokia Suite 6-in-1 (Monochrome)
-     'OOOOOOOOOOOOOOk'    Audio   : Web Audio API (Square Wave OSC)
-      'OOOOOOOOOOOO'       Langs   : x86-64 ASM / Zig / Nim / Elixir / V
-        'OOOOOOOO'         Memory  : Manual (Zig allocator)
-          'OOOO'           Display : 1-bit Monochrome LCD Matrix
-                           Medali  : Quickdraw | Pull Shark x2 | YOLO | Galaxy Brain`,      fortune: () => {
-        const q = [
-          '"Talk is cheap. Show me the code." — Linus Torvalds',
-          '"Make it work, make it right, make it fast." — Kent Beck',
-          '"Code is like humor. When you have to explain it, its bad." — Cory House',
-          '"First, solve the problem. Then, write the code." — John Johnson',
-          '"Debugging is twice as hard as writing the code." — Brian Kernighan',
-          '"The best error message never shows up." — Thomas Fuchs',
-          '"Programs must be written for people to read." — Harold Abelson',
-          '"Simplicity is the soul of efficiency." — Austin Freeman',
-        ];
-        return q[Math.floor(Math.random() * q.length)];
-      },      uptime: () => {
-        const now = new Date();
-        const boot = window._termBootTime || (window._termBootTime = now);
-        const ms = now - boot;
-        const s = Math.floor(ms / 1000);
-        const m = Math.floor(s / 60);
-        const h = Math.floor(m / 60);
-        const timeStr = h > 0 ? `${h}h ${m % 60}m ${s % 60}s` : m > 0 ? `${m}m ${s % 60}s` : `${s}s`;
-        const time = now.toLocaleTimeString();
-        return `${time}  up ${timeStr},  1 user,  load average: 0.12, 0.08, 0.05`;
-      },      pwd: () => '/home/yogiexc/code-lab',
-
-      ls: () => `drwxr-xr-x  asm_core/     (x86-64 Machine Assembly)
-drwxr-xr-x  zig_engine/   (Zig Memory Allocator)
-drwxr-xr-x  elixir_core/  (Elixir OTP Orchestrator)
-drwxr-xr-x  cli_tool/     (Vlang Fast CLI)
-drwxr-xr-x  src/          (Nim JS Core)
-drwxr-xr-x  public/       (Vercel Web Frontend)
--rw-r--r--  README.md     (Documentation)
--rw-r--r--  vercel.json   (Deployment Spec)`,      date: () => new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'medium' }),
-
-      cal: () => {
-        const d = new Date();
-        const days = ['Su','Mo','Tu','We','Th','Fr','Sa'];
-        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        let out = `   ${months[d.getMonth()]} ${d.getFullYear()}\n${days.join(' ')}\n`;
-        const first = new Date(d.getFullYear(), d.getMonth(), 1).getDay();
-        const total = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
-        let cur = 1; let row = '   '.repeat(first);
-        for (let i = first; cur <= total; i++) {
-          row += (cur === d.getDate() ? `[${String(cur).padStart(2,'0')}]` : String(cur).padStart(2,' ') + ' ');
-          if ((i + 1) % 7 === 0) { out += row.trimEnd() + '\n'; row = ''; }
-          cur++;
-        }
-        if (row.trim()) out += row;
-        return out.trimEnd();
-      },      banner: () => `
-  ____ _ _   ____            _             _   _       _     
- / ___(_) |_| __ )  __ _  __| | __ _  ___ | | | |_   _| |__  
-| |  _| | __|  _ \ / _` |/ _` |/ _` |/ _ \| |_| | | | | '_ \ 
-| |_| | | |_| |_) | (_| | (_| | (_| |  __/|  _  | |_| | |_) |
- \____|_|\__|____/ \__,_|\__,_|\__, |\___||_| |_|\__,_|_.__/ 
-                               |___/                         
-       GitHub Achievements & Retro Polyglot Arcade`,
-
-      echo: () => 'echo: usage: echo <text>',      matrix: () => {
-        const chars = '01??????????0123456789ABCDEF';
-        let stream = '';
-        for (let r = 0; r < 8; r++) {
-          let line = '';
-          for (let c = 0; c < 36; c++) {
-            line += chars[Math.floor(Math.random() * chars.length)] + ' ';
-          }
-          stream += line.trimEnd() + '\n';
-        }
-        return `[MATRIX STREAM INITIALIZED]\n` + stream.trimEnd();
-      },
-
-
-
-
-
-
-
       clear: () => {
         const out = document.getElementById('term-output');
         if (out) out.innerHTML = '';
         return null;
       },
-      cowsay: () => {
-        const msgs = [
-          'git commit -m "moo"',
-          'Push to main? Moooo-ve fast!',
-          'Have you pulled today?',
-          'Merge conflicts make me sad :(',
-          'Ship it! Moo.',
-          'Stay curious. Keep coding!',
-        ];
-        const msg = msgs[Math.floor(Math.random() * msgs.length)];
-        const bar = '-'.repeat(msg.length + 2);
-        return ` +${bar}+\n | ${msg} |\n +${bar}+\n       \\   ^__^\n        \\  (oo)\\_______\n           (__)\\       )\\/\\\n               ||----w |\n               ||     ||`;
-      },
-
 
       exit: () => {
         this.toggle(false);
