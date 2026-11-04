@@ -74,7 +74,20 @@ STATUS    : Operational (Vercel Live CDN)`,
       'OOOOOOOOOOOO'       Langs   : x86-64 ASM / Zig / Nim / Elixir / V
         'OOOOOOOO'         Memory  : Manual (Zig allocator)
           'OOOO'           Display : 1-bit Monochrome LCD Matrix
-                           Medali  : Quickdraw | Pull Shark x2 | YOLO | Galaxy Brain`,
+                           Medali  : Quickdraw | Pull Shark x2 | YOLO | Galaxy Brain`,      fortune: () => {
+        const q = [
+          '"Talk is cheap. Show me the code." — Linus Torvalds',
+          '"Make it work, make it right, make it fast." — Kent Beck',
+          '"Code is like humor. When you have to explain it, its bad." — Cory House',
+          '"First, solve the problem. Then, write the code." — John Johnson',
+          '"Debugging is twice as hard as writing the code." — Brian Kernighan',
+          '"The best error message never shows up." — Thomas Fuchs',
+          '"Programs must be written for people to read." — Harold Abelson',
+          '"Simplicity is the soul of efficiency." — Austin Freeman',
+        ];
+        return q[Math.floor(Math.random() * q.length)];
+      },
+
 
       clear: () => {
         const out = document.getElementById('term-output');
