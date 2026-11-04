@@ -66,6 +66,29 @@ STATUS    : Operational (Vercel Live CDN)`,
         if (out) out.innerHTML = '';
         return null;
       },
+      ls: () => `
+drwxr-xr-x  asm_core/           x86-64 Assembly machine-level routines
+drwxr-xr-x  zig_engine/         Zig manual memory allocation engine
+drwxr-xr-x  elixir_core/        Elixir OTP distributed orchestrator
+drwxr-xr-x  cli_tool/           Vlang high-speed native CLI binary
+drwxr-xr-x  src/                Nim transpiled web JavaScript core
+drwxr-xr-x  public/             Static web distribution (Vercel CDN)
+-rw-r--r--  README.md           Project documentation
+-rw-r--r--  vercel.json         CDN deployment configuration`,
+
+      'ls -la': () => `
+total 48
+drwxr-xr-x  7 yogiexc codelab  224 Nov  4 10:00 .
+drwxr-xr-x  3 yogiexc codelab   96 Oct 14 03:14 ..
+drwxr-xr-x  4 yogiexc codelab  128 Oct 14 03:14 asm_core
+drwxr-xr-x  2 yogiexc codelab   64 Oct 15 02:07 cli_tool
+drwxr-xr-x  3 yogiexc codelab   96 Oct 15 02:07 elixir_core
+drwxr-xr-x  9 yogiexc codelab  288 Nov  4 10:00 public
+-rw-r--r--  1 yogiexc codelab 5439 Nov  4 10:00 README.md
+-rw-r--r--  1 yogiexc codelab  120 Oct 15 02:07 vercel.json
+drwxr-xr-x  2 yogiexc codelab   64 Oct 15 02:08 src
+drwxr-xr-x  2 yogiexc codelab   64 Oct 15 02:07 zig_engine`,
+
 
       exit: () => {
         this.toggle(false);
