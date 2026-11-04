@@ -105,7 +105,25 @@ drwxr-xr-x  cli_tool/     (Vlang Fast CLI)
 drwxr-xr-x  src/          (Nim JS Core)
 drwxr-xr-x  public/       (Vercel Web Frontend)
 -rw-r--r--  README.md     (Documentation)
--rw-r--r--  vercel.json   (Deployment Spec)`,
+-rw-r--r--  vercel.json   (Deployment Spec)`,      date: () => new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'medium' }),
+
+      cal: () => {
+        const d = new Date();
+        const days = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        let out = `   ${months[d.getMonth()]} ${d.getFullYear()}\n${days.join(' ')}\n`;
+        const first = new Date(d.getFullYear(), d.getMonth(), 1).getDay();
+        const total = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+        let cur = 1; let row = '   '.repeat(first);
+        for (let i = first; cur <= total; i++) {
+          row += (cur === d.getDate() ? `[${String(cur).padStart(2,'0')}]` : String(cur).padStart(2,' ') + ' ');
+          if ((i + 1) % 7 === 0) { out += row.trimEnd() + '\n'; row = ''; }
+          cur++;
+        }
+        if (row.trim()) out += row;
+        return out.trimEnd();
+      },
+
 
 
 
