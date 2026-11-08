@@ -1,0 +1,26 @@
+{
+  "name": "@yogiexc/code-lab",
+  "version": "1.0.0",
+  "description": "Polyglot systems architecture, Nokia retro gaming lab, and interactive UNIX console suite.",
+  "main": "public/app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yogiexc/code-lab.git"
+  },
+  "keywords": [
+    "assembly",
+    "zig",
+    "nim",
+    "elixir",
+    "vlang",
+    "nokia-3310",
+    "retro-arcade",
+    "unix-shell",
+    "github-achievements"
+  ],
+  "author": "Bryan Yogie Saputra <yogiexsaputra@gmail.com> (https://github.com/Yogiexc)",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
