@@ -12,14 +12,19 @@ class UnixTerminalOverlay {
       help: () => `
 Available system commands:
   help        - List all terminal commands
+  neofetch    - System & repository architecture overview
   arch        - Display polyglot hardware & runtime layers
   games       - List all 6 Nokia retro arcade engines
   badges      - Query audit criteria for all 7 GitHub achievements
   tune        - Trigger 8-bit Nokia 3310 synthesizer tune
   whoami      - Display repository maintainer signature
+  fortune     - Classic programmer fortune quote
+  cowsay      - GitBadge cowsay easter egg
+  matrix      - Digital rain stream simulation
+  uptime      - Session uptime and load status
+  ls          - Directory structure inspection
   clear       - Clear terminal output stream
   exit        - Close this terminal overlay`,
-      
       arch: () => `
 [ARCHITECTURAL MATRIX]
   L0: x86-64 Machine Assembly (NASM ALU Registers)
