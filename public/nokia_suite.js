@@ -432,7 +432,16 @@ class NokiaGameSuite {
     const sEl = document.getElementById('nokia-score');
     if (sEl) sEl.innerText = this.score;
 
-    // Persist & display high score per game via localStorage`n    const key = `nokia_hiscore_`${this.activeGame}`;`n    const prev = parseInt(localStorage.getItem(key) || '0', 10);`n    if (this.score > prev) {`n      localStorage.setItem(key, this.score);`n    }`n    const hiEl = document.getElementById('nokia-hiscore');`n    if (hiEl) {`n      hiEl.innerText = Math.max(this.score, parseInt(localStorage.getItem(key) || '0', 10));`n    }`n  }
+    const key = 'nokia_hiscore_' + this.activeGame;
+    const prev = parseInt(localStorage.getItem(key) || '0', 10);
+    if (this.score > prev) {
+      localStorage.setItem(key, this.score);
+    }
+    const hiEl = document.getElementById('nokia-hiscore');
+    if (hiEl) {
+      hiEl.innerText = Math.max(this.score, parseInt(localStorage.getItem(key) || '0', 10));
+    }
+  }
 
   draw() {
     const { ctx, canvas } = this;
