@@ -34,13 +34,15 @@ Available system commands:
   L4: Elixir 1.14 (Erlang OTP Concurrency Orchestrator)`,
 
       games: () => `
-[NOKIA RETRO SUITE ENGINES]
+[NOKIA RETRO SUITE 8-IN-1 ENGINES]
   1. Snake II (Snake Xenzia)
   2. Space Impact (Alien Shooter)
   3. Bounce Classic (Red Ball Adventure)
   4. Pocket Carrom (Board Physics)
   5. Cricket (Timing Stroke Window)
-  6. Retro Pong (AI Paddle Engine)`,
+  6. Retro Pong (AI Paddle Engine)
+  7. Flappy Pixel (CPU Machine Model)
+  8. Metal Slug 2D (Pixel Commando Run & Gun)`,
 
       badges: () => `
 [ACHIEVEMENT REPOSITORY INDEX]
@@ -146,7 +148,9 @@ STATUS    : Operational (Vercel Live CDN)`,
           ['Bounce Classic', 'bounce'],
           ['Pocket Carrom', 'carrom'],
           ['Cricket', 'cricket'],
-          ['Retro Pong', 'pong']
+          ['Retro Pong', 'pong'],
+          ['Flappy Pixel', 'flappy'],
+          ['Metal Slug', 'slug']
         ];
         let out = '[NOKIA RETRO HIGH SCORE ARCHIVE]\n';
         games.forEach(([name, id]) => {

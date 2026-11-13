@@ -83,6 +83,25 @@ class NokiaGameSuite {
       paddleH: 50
     };
 
+    // 7. Flappy Pixel State
+    this.flappy = {
+      birdY: 150,
+      vy: 0,
+      pipes: [],
+      spawnTimer: 0
+    };
+
+    // 8. Metal Slug Pixel Commando State
+    this.slug = {
+      playerX: 60,
+      playerY: 236,
+      vy: 0,
+      isGrounded: true,
+      bullets: [],
+      enemies: [{ x: 380, y: 236, hp: 2 }, { x: 440, y: 236, hp: 2 }],
+      spawnTimer: 0
+    };
+
     this.bindControls();
     this.loop = this.loop.bind(this);
     requestAnimationFrame(this.loop);
@@ -107,7 +126,9 @@ class NokiaGameSuite {
         bounce: 'Bounce Classic (Red Ball Adventure)',
         carrom: 'Pocket Carrom (Monochrome Board)',
         cricket: 'Cricket (Stroke Timing)',
-        pong: 'Pong (Classic Retro Paddle)'
+        pong: 'Pong (Classic Retro Paddle)',
+        flappy: 'Flappy Pixel (CPU Machine Model)',
+        slug: 'Metal Slug 2D (Pixel Commando)'
       };
       titleEl.innerText = names[gameId] || gameId;
     }
@@ -264,6 +285,23 @@ class NokiaGameSuite {
     } else if (this.activeGame === 'pong') {
       if (action === 'up') this.pong.playerY = Math.max(10, this.pong.playerY - 25);
       if (action === 'down') this.pong.playerY = Math.min(240, this.pong.playerY + 25);
+    } else if (this.activeGame === 'flappy') {
+      if (action === 'action' || action === 'up') {
+        this.flappy.vy = -5.0;
+        if (window.nokiaAudio) window.nokiaAudio.beep();
+      }
+    } else if (this.activeGame === 'slug') {
+      if (action === 'left') this.slug.playerX = Math.max(20, this.slug.playerX - 16);
+      if (action === 'right') this.slug.playerX = Math.min(440, this.slug.playerX + 16);
+      if ((action === 'up') && this.slug.isGrounded) {
+        this.slug.vy = -8.5;
+        this.slug.isGrounded = false;
+        if (window.nokiaAudio) window.nokiaAudio.bounce();
+      }
+      if (action === 'action') {
+        this.slug.bullets.push({ x: this.slug.playerX + 16, y: this.slug.playerY + 6 });
+        if (window.nokiaAudio) window.nokiaAudio.shoot();
+      }
     }
   }
 
@@ -417,6 +455,86 @@ class NokiaGameSuite {
         this.pong.ballX = 240;
         this.pong.ballY = 150;
         this.pong.vx = -3.5;
+      }
+    } else if (this.activeGame === 'flappy') {
+      this.flappy.vy += 0.28;
+      this.flappy.birdY += this.flappy.vy;
+
+      if (this.flappy.birdY < 5 || this.flappy.birdY > 285) {
+        this.isGameOver = true;
+        if (window.nokiaAudio) window.nokiaAudio.gameOverTune();
+        return;
+      }
+
+      this.flappy.spawnTimer++;
+      if (this.flappy.spawnTimer > 85) {
+        this.flappy.spawnTimer = 0;
+        const gap = 85;
+        const top = Math.floor(Math.random() * 120) + 40;
+        this.flappy.pipes.push({ x: 480, top: top, bottom: top + gap, passed: false });
+      }
+
+      const birdX = 90;
+      this.flappy.pipes.forEach(p => {
+        p.x -= 2.2;
+        if (!p.passed && p.x + 30 < birdX) {
+          p.passed = true;
+          this.score += 10;
+          this.updateHUD();
+          if (window.nokiaAudio) window.nokiaAudio.scorePoint();
+        }
+        if (birdX + 8 > p.x && birdX - 8 < p.x + 30) {
+          if (this.flappy.birdY - 6 < p.top || this.flappy.birdY + 6 > p.bottom) {
+            this.isGameOver = true;
+            if (window.nokiaAudio) window.nokiaAudio.gameOverTune();
+          }
+        }
+      });
+      this.flappy.pipes = this.flappy.pipes.filter(p => p.x > -40);
+
+    } else if (this.activeGame === 'slug') {
+      // Gravity
+      if (!this.slug.isGrounded) {
+        this.slug.vy += 0.5;
+        this.slug.playerY += this.slug.vy;
+        if (this.slug.playerY >= 236) {
+          this.slug.playerY = 236;
+          this.slug.vy = 0;
+          this.slug.isGrounded = true;
+        }
+      }
+
+      // Bullets
+      this.slug.bullets.forEach(b => b.x += 8);
+      this.slug.bullets = this.slug.bullets.filter(b => b.x < 480);
+
+      // Enemies
+      this.slug.enemies.forEach(en => {
+        en.x -= 1.2;
+        this.slug.bullets.forEach((b, bIdx) => {
+          if (b.x >= en.x && b.x <= en.x + 18 && b.y >= en.y && b.y <= en.y + 24) {
+            en.hp--;
+            this.slug.bullets.splice(bIdx, 1);
+            if (en.hp <= 0) {
+              this.score += 20;
+              this.updateHUD();
+              if (window.nokiaAudio) window.nokiaAudio.alienExplode();
+            }
+          }
+        });
+
+        // Collision with player
+        if (Math.abs(en.x - this.slug.playerX) < 14 && Math.abs(en.y - this.slug.playerY) < 16) {
+          this.isGameOver = true;
+          if (window.nokiaAudio) window.nokiaAudio.gameOverTune();
+        }
+      });
+
+      this.slug.enemies = this.slug.enemies.filter(en => en.hp > 0 && en.x > -20);
+      this.slug.spawnTimer++;
+      if (this.slug.spawnTimer > 90) {
+        this.slug.spawnTimer = 0;
+        this.slug.enemies.push({ x: 480, y: 236, hp: 2 });
       }
     }
   }
@@ -576,6 +694,55 @@ class NokiaGameSuite {
 
       // Ball
       ctx.fillRect(this.pong.ballX - 3, this.pong.ballY - 3, 6, 6);
+    } else if (this.activeGame === 'flappy') {
+      // Ground line
+      ctx.strokeStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.moveTo(0, 290);
+      ctx.lineTo(w, 290);
+      ctx.stroke();
+
+      // Bird
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(82, this.flappy.birdY - 6, 14, 12);
+      ctx.fillRect(96, this.flappy.birdY - 2, 4, 4);
+
+      // Pipes
+      this.flappy.pipes.forEach(p => {
+        ctx.strokeStyle = '#ffffff';
+        ctx.strokeRect(p.x, 0, 30, p.top);
+        ctx.strokeRect(p.x, p.bottom, 30, 290 - p.bottom);
+        ctx.fillRect(p.x + 4, p.top - 8, 22, 8);
+        ctx.fillRect(p.x + 4, p.bottom, 22, 8);
+      });
+
+    } else if (this.activeGame === 'slug') {
+      // Ground line
+      ctx.strokeStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.moveTo(0, 260);
+      ctx.lineTo(w, 260);
+      ctx.stroke();
+
+      // Player Commando
+      const px = this.slug.playerX;
+      const py = this.slug.playerY;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(px, py, 14, 24);
+      ctx.fillRect(px + 4, py - 6, 8, 6); // head
+      ctx.fillRect(px + 14, py + 8, 8, 4); // gun
+
+      // Bullets
+      this.slug.bullets.forEach(b => {
+        ctx.fillRect(b.x, b.y, 6, 2);
+      });
+
+      // Enemies
+      this.slug.enemies.forEach(en => {
+        ctx.strokeStyle = '#ffffff';
+        ctx.strokeRect(en.x, en.y, 16, 24);
+        ctx.fillRect(en.x + 4, en.y + 4, 8, 14);
+      });
     }
 
     if (this.isGameOver) {
