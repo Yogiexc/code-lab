@@ -61,7 +61,10 @@ async function inspectGitHubProfile() {
 
         <div style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 0.85rem; display: flex; justify-content: space-between; align-items: center;">
           <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-tertiary);">Status: Public Profile Analysis Complete</span>
-          <button id="btn-print-receipt" class="btn-clipboard" style="position: static;" onclick="generateAsciiReceipt('${data.login}', ${publicRepos}, ${totalStars})">Print ASCII Receipt</button>
+          <div style="display:flex; gap:0.5rem;">
+            <button id="btn-print-receipt" class="btn-clipboard" style="position: static;" onclick="generateAsciiReceipt('${data.login}', ${publicRepos}, ${totalStars})">Print ASCII Receipt</button>
+            <button id="btn-export-badge" class="btn-clipboard" style="position: static;" onclick="exportSummaryCard('${data.login}', ${publicRepos}, ${totalStars})">Export Card (PNG)</button>
+          </div>
         </div>
       </div>
     `;
@@ -113,3 +116,65 @@ document.addEventListener('DOMContentLoaded', () => {
   const inspectBtn = document.getElementById('btn-inspect-profile');
   if (inspectBtn) inspectBtn.addEventListener('click', inspectGitHubProfile);
 });
+
+function exportSummaryCard(user, repos, stars) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 600;
+  canvas.height = 340;
+  const ctx = canvas.getContext('2d');
+
+  // Background
+  ctx.fillStyle = '#080808';
+  ctx.fillRect(0, 0, 600, 340);
+
+  // Border & Grid
+  ctx.strokeStyle = '#222222';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(12, 12, 576, 316);
+
+  // Accent Line
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(24, 24, 6, 28);
+
+  // Title
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 20px monospace';
+  ctx.fillText('GITBADGE // SPECIFICATION AUDIT', 38, 44);
+
+  ctx.fillStyle = '#888888';
+  ctx.font = '12px monospace';
+  ctx.fillText('ARCH: x86-64 NASM · ZIG · NIM · ELIXIR', 38, 62);
+
+  // User Section
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 16px monospace';
+  ctx.fillText('DEVELOPER : @' + user.toUpperCase(), 38, 105);
+
+  ctx.fillStyle = '#888888';
+  ctx.font = '13px monospace';
+  ctx.fillText('PUBLIC REPOSITORIES : ' + repos, 38, 130);
+  ctx.fillText('STARSTRUCK STARS    : ' + stars + ' / 16 (STARSTRUCK AUDIT)', 38, 150);
+
+  // Badges Status Matrix
+  ctx.fillStyle = '#141414';
+  ctx.fillRect(38, 175, 524, 100);
+  ctx.strokeStyle = '#333333';
+  ctx.strokeRect(38, 175, 524, 100);
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '12px monospace';
+  ctx.fillText('[X] QUICKDRAW      [X] PULL SHARK (x2)', 54, 205);
+  ctx.fillText('[X] YOLO           [X] GALAXY BRAIN', 54, 230);
+  ctx.fillText('[?] PAIR EXTRA     [?] STARSTRUCK (' + (stars >= 16 ? 'VERIFIED' : 'PENDING') + ')', 54, 255);
+
+  // Footer Branding
+  ctx.fillStyle = '#555555';
+  ctx.font = '11px monospace';
+  ctx.fillText('VERIFIED AT CODE-LAB // GITHUB.COM/YOGIEXC/CODE-LAB', 38, 305);
+
+  // Trigger Download
+  const link = document.createElement('a');
+  link.download = `gitbadge-audit-${user}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}

@@ -43,6 +43,19 @@ class NokiaSoundEngine {
     }
   }
 
+  // Extended 8-bit Retro Game Sound Effects
+  shoot() { this.playTone(720, 45, 'square'); }
+  alienExplode() { this.playTone(160, 140, 'sawtooth'); }
+  paddleHit() { this.playTone(600, 40, 'square'); }
+  scorePoint() { this.playTone(1050, 90, 'sine'); }
+  carromClack() { this.playTone(320, 35, 'triangle'); }
+  cricketSmack() { this.playTone(240, 110, 'sawtooth'); }
+  gameOverTune() {
+    [330, 294, 261, 196].forEach((f, i) => {
+      setTimeout(() => this.playTone(f, 150, 'sawtooth'), i * 160);
+    });
+  }
+
   // Sound FX
   beep() { this.playTone(880, 50); }
   eatFood() { this.playTone(1320, 80); }

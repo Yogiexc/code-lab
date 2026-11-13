@@ -24,7 +24,7 @@ Available system commands:
   uptime      - Session uptime and load status
   ls          - Directory structure inspection
   clear       - Clear terminal output stream
-  exit        - Close this terminal overlay`,
+  stats       - View high score records of Nokia arcade games\n  theme       - Switch CRT display tint (green, amber, reset)\n  sponsor     - View GitHub Sponsors maintainer link & tiers\n  exit        - Close this terminal overlay`,
       arch: () => `
 [ARCHITECTURAL MATRIX]
   L0: x86-64 Machine Assembly (NASM ALU Registers)
@@ -139,6 +139,49 @@ STATUS    : Operational (Vercel Live CDN)`,
         return null;
       },
 
+      stats: () => {
+        const games = [
+          ['Snake II', 'snake'],
+          ['Space Impact', 'space'],
+          ['Bounce Classic', 'bounce'],
+          ['Pocket Carrom', 'carrom'],
+          ['Cricket', 'cricket'],
+          ['Retro Pong', 'pong']
+        ];
+        let out = '[NOKIA RETRO HIGH SCORE ARCHIVE]\n';
+        games.forEach(([name, id]) => {
+          const hi = localStorage.getItem('nokia_hiscore_' + id) || '0';
+          out += '  - ' + name.padEnd(16) + ': ' + hi + ' pts\n';
+        });
+        return out.trimEnd();
+      },
+
+      theme: (color) => {
+        const c = (color || '').toLowerCase().trim();
+        const body = document.body;
+        if (c === 'green' || c === 'matrix') {
+          body.style.filter = 'sepia(1) hue-rotate(85deg) saturate(3)';
+          return 'Theme switched to [PHOSPHOR GREEN MATRIX]. Run "theme reset" to restore.';
+        } else if (c === 'amber' || c === 'crt') {
+          body.style.filter = 'sepia(1) hue-rotate(5deg) saturate(4)';
+          return 'Theme switched to [AMBER CRT RETRO]. Run "theme reset" to restore.';
+        } else if (c === 'reset' || c === 'default') {
+          body.style.filter = 'none';
+          return 'Theme restored to [DEFAULT PURE MONOCHROME].';
+        } else {
+          return 'Usage: theme <green|amber|reset>\n  Example: theme green\n  Example: theme reset';
+        }
+      },
+
+      sponsor: () => {
+        return [
+          '[GITHUB SPONSORS REPOSITORY PORTAL]',
+          'Maintainer : Bryan Yogie Saputra (@Yogiexc)',
+          'Profile URL: https://github.com/sponsors/Yogiexc',
+          'Status     : Verified Public Sponsorship Active ($1 / $5 / $10)',
+          'Benefit    : Public Sponsor Badge on GitHub Profile'
+        ].join('\n');
+      },
       exit: () => {
         this.toggle(false);
         return 'Terminal closed.';

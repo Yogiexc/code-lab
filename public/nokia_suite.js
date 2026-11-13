@@ -248,12 +248,12 @@ class NokiaGameSuite {
         const diff = Math.abs(this.cricket.ballX - 110);
         if (diff < 14) {
           this.score += 6;
-          this.cricket.resultText = 'SIX RUNS!';
+          this.cricket.resultText = 'SIX RUNS!'; if (window.nokiaAudio) window.nokiaAudio.cricketSmack();
           this.cricket.ballVx = 8.5;
           this.cricket.ballVy = -4.5;
         } else if (diff < 28) {
           this.score += 4;
-          this.cricket.resultText = 'FOUR RUNS!';
+          this.cricket.resultText = 'FOUR RUNS!'; if (window.nokiaAudio) window.nokiaAudio.cricketSmack();
           this.cricket.ballVx = 6.5;
           this.cricket.ballVy = -2.5;
         } else {
@@ -281,8 +281,7 @@ class NokiaGameSuite {
         };
 
         if (this.snake.body.some((seg, idx) => idx > 0 && seg.x === head.x && seg.y === head.y)) {
-          this.isGameOver = true;
-          return;
+          this.isGameOver = true; if (window.nokiaAudio) window.nokiaAudio.gameOverTune(); return;
         }
 
         this.snake.body.unshift(head);
@@ -307,8 +306,7 @@ class NokiaGameSuite {
             a.hp--;
             this.space.lasers.splice(lIdx, 1);
             if (a.hp <= 0) {
-              this.score += 25;
-              this.updateHUD();
+              this.score += 25; this.updateHUD(); if (window.nokiaAudio) window.nokiaAudio.alienExplode();
             }
           }
         });
@@ -399,9 +397,7 @@ class NokiaGameSuite {
 
       // Player paddle bounce (Left side x=30)
       if (this.pong.ballX <= 36 && this.pong.ballY >= this.pong.playerY && this.pong.ballY <= this.pong.playerY + this.pong.paddleH) {
-        this.pong.vx = Math.abs(this.pong.vx) * 1.05;
-        this.score += 10;
-        this.updateHUD();
+        this.pong.vx = Math.abs(this.pong.vx) * 1.05; this.score += 10; this.updateHUD(); if (window.nokiaAudio) window.nokiaAudio.paddleHit();
       }
 
       // AI Paddle tracking (Right side x=450)
@@ -410,17 +406,14 @@ class NokiaGameSuite {
 
       // AI paddle bounce
       if (this.pong.ballX >= 444 && this.pong.ballY >= this.pong.aiY && this.pong.ballY <= this.pong.aiY + this.pong.paddleH) {
-        this.pong.vx = -Math.abs(this.pong.vx);
+        this.pong.vx = -Math.abs(this.pong.vx); if (window.nokiaAudio) window.nokiaAudio.paddleHit();
       }
 
       // Missed left
       if (this.pong.ballX < 10) {
-        this.isGameOver = true;
-      }
-      // Missed right (Score!)
+        this.isGameOver = true; if (window.nokiaAudio) window.nokiaAudio.gameOverTune(); } // Missed right (Score!)
       if (this.pong.ballX > 470) {
-        this.score += 50;
-        this.updateHUD();
+        this.score += 50; this.updateHUD(); if (window.nokiaAudio) window.nokiaAudio.scorePoint();
         this.pong.ballX = 240;
         this.pong.ballY = 150;
         this.pong.vx = -3.5;
