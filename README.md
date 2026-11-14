@@ -25,26 +25,30 @@ The platform architecture organizes computational responsibilities by abstractio
 
 ## Platform Features
 
-### 1. Retro Monochrome Gaming Suite
+### 1. Retro Monochrome Gaming Suite (8-in-1 Official)
 Embedded gaming engine strictly adhering to a 1-bit monochrome black-and-white LCD display matrix:
 - **Snake II (Snake Xenzia)**: Wall-wrapping coordinate logic with self-collision detection algorithms.
 - **Space Impact**: Side-scrolling projectile engine with raycasting against alien waves.
 - **Bounce Classic**: Gravity-driven ball physics with restitution bounce mechanics and golden ring collection.
 - **Pocket Carrom**: Two-dimensional board friction deceleration, angular aiming, and pocket boundary checks.
 - **Cricket**: Bat-swing timing evaluation window for boundary scoring calculation.
-- **Retro Pong**: Dual-paddle table tennis arcade game with automated tracking logic.
+- **Retro Pong**: Dual-paddle table tennis arcade game with automated tracking and ALU deflection math.
+- **Flappy Pixel**: Fixed-point gravity and vertical acceleration model inspired by machine instruction routines.
+- **Metal Slug 2D**: Side-scrolling pixel commando run-and-gun combat with ballistics trajectory simulation.
 
 ### 2. Audio and Visual Authenticity
 - **Nokia 3310 Monophonic Synthesizer**: Pure Web Audio API square-wave oscillator generating 8-bit sound effects and the authentic Gran Vals ringtone without external audio asset dependencies.
-- **Display Matrix Filter**: Real-time switchable viewport supporting both pure monochrome high-contrast mode and classic Nokia 3310 phosphor green LCD illumination.
+- **Dynamic Retro SFX**: Real-time sound synthesis for hits, explosions, laser fire, bat smacks, and game-over events.
+- **Display Matrix Filter**: Real-time switchable viewport supporting pure monochrome mode, classic Nokia 3310 phosphor green LCD illumination, and terminal CRT themes.
 
-### 3. Live GitHub Profile Inspector and ASCII Receipt
+### 3. Live GitHub Profile Inspector, Audit, and Export Card
 - Real-time GitHub REST API audit inspecting repositories, stars, and achievement eligibility.
 - Built-in ASCII receipt printer generating structured terminal verification records.
+- High-resolution monochrome PNG export card for portfolio embedding and GitHub Profile README showcase.
 
 ### 4. Interactive UNIX Terminal Console
 - Global Quake-style drop-down console accessible via the backquote key or navigation bar trigger.
-- Internal commands: `help`, `neofetch`, `cowsay`, `fortune`, `matrix`, `uptime`, `ls`, `arch`, `games`, `badges`, `tune`, `whoami`, `clear`, and `exit`.
+- Internal commands: `help`, `neofetch`, `cowsay`, `fortune`, `matrix`, `uptime`, `ls`, `arch`, `games`, `badges`, `stats`, `theme`, `sponsor`, `tune`, `whoami`, `clear`, and `exit`.
 
 ### 5. Signature and Milestone Workbench
 - **Co-Authored-By Generator**: Produces RFC-compliant Git trailers for collaborative achievements such as Pair Extraordinaire.
@@ -79,8 +83,8 @@ code-lab/
 │   ├── style.css                     # Monochrome design system
 │   ├── app.js                        # Client execution bundle
 │   ├── nokia_audio.js                # Web Audio API 8-bit synthesizer
-│   ├── nokia_suite.js                # Retro gaming suite runtime
-│   ├── profile_inspector.js          # REST API audit and ASCII receipt printer
+│   ├── nokia_suite.js                # Retro gaming suite runtime (8-in-1)
+│   ├── profile_inspector.js          # REST API audit, receipt, and PNG export
 │   └── terminal_console.js           # Interactive UNIX shell overlay
 ├── package.json                      # GitHub Packages registry configuration
 └── vercel.json                       # Production deployment specification
