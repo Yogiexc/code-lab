@@ -42,12 +42,30 @@ pub fn calculateActiveBadges(mask: u64) u32 {
     return @popCount(mask);
 }
 
+/// Calculate PR count threshold progression
+pub fn getPullSharkTier(pr_count: u32) BadgeTier {
+    if (pr_count >= 128) return .gold;
+    if (pr_count >= 16) return .silver;
+    if (pr_count >= 2) return .bronze;
+    return .locked;
+}
+
+/// Calculate discussions answer threshold progression
+pub fn getGalaxyBrainTier(answer_count: u32) BadgeTier {
+    if (answer_count >= 16) return .gold;
+    if (answer_count >= 8) return .silver;
+    if (answer_count >= 2) return .bronze;
+    return .locked;
+}
+
 pub fn main() !void {
     const stdout = std.io.getStdOut().writer();
     try stdout.print("=== GitBadge Low-Level Zig Engine Active ===\n", .{});
     
     const sample_mask: u64 = 0b1101; // 3 Badges active
     const active_count = calculateActiveBadges(sample_mask);
-    
-    try stdout.print("Active Badges Verified: {d}\n", .{active_count});
+    try stdout.print("Active Badges: {d}\n", .{active_count});
+
+    const shark_tier = getPullSharkTier(16);
+    try stdout.print("Pull Shark Tier: {any}\n", .{shark_tier});
 }
