@@ -14,46 +14,78 @@ fn get_guides() []AchievementGuide {
 	return [
 		AchievementGuide{
 			id: 'quickdraw'
-			title: 'Quickdraw 🤠'
-			speed_time: '< 5 Menit'
-			difficulty: 'Mudah (100% Solo)'
-			instruction: 'Bikin issue baru di repo publik, lalu langsung klik Close issue.'
+			title: 'Quickdraw'
+			speed_time: '< 5 Minutes'
+			difficulty: 'Solo / Instant'
+			instruction: 'Open an issue or pull request, then close it within 5 minutes.'
 		},
 		AchievementGuide{
 			id: 'pull-shark'
-			title: 'Pull Shark 🦈'
-			speed_time: '2 - 5 Menit'
-			difficulty: 'Mudah'
-			instruction: 'Merge PR ke main (Bronze: 2 PR, Silver: 16 PR, Gold: 128 PR).'
+			title: 'Pull Shark'
+			speed_time: '2 - 5 Minutes'
+			difficulty: 'Cumulative'
+			instruction: 'Merge PRs into the default branch (Bronze: 2, Silver: 16, Gold: 128).'
 		},
 		AchievementGuide{
 			id: 'galaxy-brain'
-			title: 'Galaxy Brain 🧠'
-			speed_time: '5 Menit'
-			difficulty: 'Kolaborasi'
-			instruction: 'Jawab pertanyaan Q&A di Discussions dan di-mark as answer (2x).'
+			title: 'Galaxy Brain'
+			speed_time: '5 Minutes'
+			difficulty: 'Collaborative'
+			instruction: 'Provide answers in Q&A Discussions and receive accepted answer marks (2x).'
 		},
 		AchievementGuide{
 			id: 'pair-extraordinaire'
-			title: 'Pair Extraordinaire 🤝'
-			speed_time: '3 Menit'
+			title: 'Pair Extraordinaire'
+			speed_time: '3 Minutes'
 			difficulty: 'Co-Author'
-			instruction: 'Merge PR yang mengandung trailer Co-authored-by:.'
+			instruction: 'Merge a pull request containing RFC-compliant Co-authored-by: trailers.'
+		},
+		AchievementGuide{
+			id: 'yolo'
+			title: 'YOLO'
+			speed_time: '1 Minute'
+			difficulty: 'Autonomous'
+			instruction: 'Merge a pull request directly without waiting for reviewer approval.'
+		},
+		AchievementGuide{
+			id: 'public-sponsor'
+			title: 'Public Sponsor'
+			speed_time: 'Instant'
+			difficulty: 'Sponsorship'
+			instruction: 'Sponsor an open-source contributor with public visibility via GitHub Sponsors.'
+		},
+		AchievementGuide{
+			id: 'starstruck'
+			title: 'Starstruck'
+			speed_time: 'Cumulative'
+			difficulty: 'Community'
+			instruction: 'Maintain a repository reaching threshold stars (Tier 1: 16 stars).'
 		},
 	]
 }
 
 fn main() {
 	println('=====================================================')
-	println('⚡ GitBadge CLI Tool - Powered by V (Vlang) Engine')
+	println('GitBadge CLI Tool - Powered by V (Vlang) Engine')
 	println('=====================================================')
 	guides := get_guides()
-	for g in guides {
-		println('[${g.id.to_upper()}] ${g.title}')
-		println('   ⏱️  Waktu      : ${g.speed_time}')
-		println('   🎯 Kesulitan  : ${g.difficulty}')
-		println('   📝 Cara Cepat : ${g.instruction}')
-		println('-----------------------------------------------------')
+
+	if os.args.len > 1 {
+		query := os.args[1]
+		for g in guides {
+			if g.id == query {
+				println('Badge      : ${g.title}')
+				println('Time Est   : ${g.speed_time}')
+				println('Difficulty : ${g.difficulty}')
+				println('Instruction: ${g.instruction}')
+				return
+			}
+		}
+		println('Badge not found: ${query}')
+		return
 	}
-	println('🚀 Kunjungi Web App: https://code-lab-five-cyan.vercel.app/')
+
+	for g in guides {
+		println('[${g.id}] ${g.title} (${g.speed_time}) - ${g.difficulty}')
+	}
 }
