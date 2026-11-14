@@ -1,11 +1,11 @@
 defmodule GitBadge.Orchestrator do
   @moduledoc """
-  Sistem terdistribusi berbasis BEAM VM untuk memproses antrean verifikasi
-  dan pemantauan status pencapaian medali GitHub (Pair Extraordinaire, Pull Shark, Galaxy Brain).
+  Distributed BEAM VM verification orchestrator for monitoring and queuing
+  GitHub achievement evaluations (Pair Extraordinaire, Pull Shark, Galaxy Brain, Public Sponsor).
   """
 
   @doc """
-  Memvalidasi apakah trailer commit mematuhi standar Co-Authored-By GitHub.
+  Validates whether a commit trailer string conforms to GitHub RFC Co-Authored-By specification.
   """
   def validate_coauthor_trailer(trailer) when is_binary(trailer) do
     regex = ~r/^Co-authored-by:\s+(?<name>[^<]+)\s+<(?<email>[^>]+)>$/i
@@ -20,14 +20,17 @@ defmodule GitBadge.Orchestrator do
   end
 
   @doc """
-  Menghitung estimasi waktu sinkronisasi antrean GitHub cronjob (batch delay).
+  Estimates processing and reconciliation window across GitHub backend queue pipelines.
   """
   def estimate_sync_window(badge_type) do
     case badge_type do
-      :quickdraw -> {:ok, "1 - 5 Menit (Event-triggered)"}
-      :pull_shark -> {:ok, "5 - 15 Menit (Webhook-triggered)"}
-      :galaxy_brain -> {:ok, "5 - 15 Menit (Discussions-indexed)"}
-      :pair_extraordinaire -> {:ok, "24 - 48 Jam (Batch User Account Cross-reference)"}
+      :quickdraw -> {:ok, "1 - 5 Minutes (Event-driven)"}
+      :pull_shark -> {:ok, "5 - 15 Minutes (Webhook-driven)"}
+      :galaxy_brain -> {:ok, "5 - 15 Minutes (Discussion indexer)"}
+      :pair_extraordinaire -> {:ok, "24 - 48 Hours (Batch user cross-reference)"}
+      :yolo -> {:ok, "1 - 5 Minutes (Immediate merge hook)"}
+      :public_sponsor -> {:ok, "Instant (Stripe / GitHub billing webhook)"}
+      :starstruck -> {:ok, "1 - 10 Minutes (Star count aggregation)"}
       _ -> {:error, :unknown_badge}
     end
   end
