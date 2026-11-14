@@ -166,3 +166,32 @@ _nokia_cricket_swing:
 .four_runs:
     mov     rax, 4
     ret
+
+
+; ------------------------------------------------------------------------------
+; 9. Retro Pong Paddle Deflection Engine
+; Input : RDI = Ball Y, RSI = Paddle Top Y, RDX = Paddle Height
+; Output: RAX = Deflection velocity (-4 to +4), RDX = 1 if hit, 0 if miss
+; ------------------------------------------------------------------------------
+global _nokia_pong_deflect
+_nokia_pong_deflect:
+    cmp     edi, esi
+    jl      .miss
+    mov     ecx, esi
+    add     ecx, edx
+    cmp     edi, ecx
+    jg      .miss
+
+    ; Calculate relative offset from center of paddle
+    sub     edi, esi
+    sar     edx, 1                  ; Center offset = height / 2
+    sub     edi, edx
+    sar     edi, 2                  ; Scale velocity factor
+    mov     eax, edi
+    mov     edx, 1                  ; Hit confirmed
+    ret
+
+.miss:
+    xor     eax, eax
+    xor     edx, edx                ; Miss
+    ret
